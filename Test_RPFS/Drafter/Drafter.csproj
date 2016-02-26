@@ -78,6 +78,7 @@
   <ItemGroup>
     <Content Include="admin.aspx" />
     <Content Include="default.aspx" />
+    <Content Include="install.sql" />
     <Content Include="rooms.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
