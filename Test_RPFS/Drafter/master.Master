@@ -1,0 +1,24 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="master.master.cs" Inherits="Drafter.master" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <h1>RPFS Drafter</h1><br />
+        <asp:LinkButton ID="lnkHome" runat="server" Text="Home" PostBackUrl="~/default.aspx"></asp:LinkButton>
+        <asp:LinkButton ID="lnkRooms" runat="server" Text="Rooms" PostBackUrl="~/rooms.aspx"></asp:LinkButton>
+        <asp:LinkButton ID="lnkAdmin" runat="server" Text="Admin" PostBackUrl="~/admin.aspx"></asp:LinkButton>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+</body>
+</html>
