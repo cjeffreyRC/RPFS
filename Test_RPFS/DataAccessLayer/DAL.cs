@@ -1,34 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Data;
-using System.Configuration;
 
-namespace DAL_Project
+namespace DataAccessLayer
 {
-    /// <summary>
-    /// The DAL class allows a programmer to keep all their database interactions in one spot
-    /// We can specify the ConnString once, add parameters and execute an appropriate stored procedure.
-    /// 
-    /// Example usage:
-    /// 
-    /// // A) No parameters, just a select with a resulting DataSet (used on a GridView)
-    /// DAL d = new DAL("Data Source=localhost;Initial Catalog=dbCustomers;Integrated Security=SSPI");
-    /// DataSet ds = d.ExecuteProcedure("spGetClients");
-    /// GridViewClients.DataSource = ds.Tables[0];
-    /// GridViewClients.DataBind();
-    /// 
-    /// // B) A single parameter, used to run a delete procedure, no useful DataSet returned from a delete
-    /// DAL_Project.Dal dal = new DAL_Project.DAL("Data Source=localhost;Initial Catalog=dbHighSchool;Integrated Security=SSPI");
-    /// d.AddParam("StudentId",txtStudentId.Text);
-    /// d.ExecuteProcedure("spDeleteStudent");
-    /// 
-    /// // C) An insert procedure with more than one parameter, a table is returned with the @@IDENTITY value
-    /// DAL_Project.Dal dal = new DAL_Project.DAL("Data Source=localhost;Initial Catalog=dbCommerce;Integrated Security=SSPI");
-    /// d.AddParam("ItemName",txtItemName.Text);
-    /// d.AddParam("ItemPrice,itemPrice);
-    /// DataSet ds = d.ExecuteProcedure("spInsertItem");
-    /// string newId = ds.Tables[0].Rows[0]["ItemId"].ToString();
-    /// </summary>
     public class DAL
     {
         public string ConnString; // The value of the Connect String, used in all database connections
@@ -42,7 +17,7 @@ namespace DAL_Project
         /// <param name="connString">A string parameter to indicate the database to connect to.</param>
         public DAL()
         {
-            ConnString = "Data Source = localhost; Initial Catalog = dbLoveDev; Integrated Security = SSPI"; //"Data Source=localhost;Initial Catalog=dbAssignment3;Integrated Security=SSPI"; // Set the internal variable ConnString to the value of the user chosen value connString
+            ConnString = "Data Source=localhost;Initial Catalog=RPFS;Integrated Security=SSPI"; // Set the internal variable ConnString to the value of the user chosen value connString
             _parameters = new List<SqlParameter>(); // initialize our list of parameters to 0
         }
 
@@ -88,7 +63,7 @@ namespace DAL_Project
             conn.Open();
             da.Fill(dsResult);
             conn.Close();
-            ClearParams();
+
             return dsResult;
         }
 
@@ -108,10 +83,9 @@ namespace DAL_Project
             conn.Open();
             string result = cmd.ExecuteScalar().ToString();
             conn.Close();
-            ClearParams();
+
             return result;
         }
-
 
         public void ExecuteNonQuery(string ProcName)
         {
@@ -129,7 +103,6 @@ namespace DAL_Project
             conn.Open();
             cmd.ExecuteNonQuery();
             conn.Close();
-            ClearParams();
         }
 
         /// <summary>
