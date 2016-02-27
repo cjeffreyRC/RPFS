@@ -77,7 +77,17 @@ playerTeam int foreign key references tbTeams(teamId)
 --Getting all players from excel sheet and loading into players table
 BULK
 INSERT tbPlayers
-FROM '~\Rosters\NHL16_PlayerList\forwards.csv'
+FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\forwards.csv'
+WITH
+(
+FIELDTERMINATOR = ',',
+ROWTERMINATOR = '\n'
+)
+GO
+select * from tbPlayers
+BULK
+INSERT tbPlayers
+FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\defenders.csv'
 WITH
 (
 FIELDTERMINATOR = ',',
@@ -86,16 +96,7 @@ ROWTERMINATOR = '\n'
 GO
 BULK
 INSERT tbPlayers
-FROM '~\Rosters\NHL16_PlayerList\defenders.csv'
-WITH
-(
-FIELDTERMINATOR = ',',
-ROWTERMINATOR = '\n'
-)
-GO
-BULK
-INSERT tbPlayers
-FROM '~\Rosters\NHL16_PlayerList\goalies.csv'
+FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\goalies.csv'
 WITH
 (
 FIELDTERMINATOR = ',',
