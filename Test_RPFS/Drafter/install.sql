@@ -120,5 +120,5 @@ go
 
 --</PROCEDURES>
 
-
+exec spGetAvailablePlayers
 select * from tbPlayers
