@@ -9,21 +9,21 @@ namespace Test
 {
     public class ChatHub : Hub
     {
-        public void Send(string name, string message)
+        public void Send(string userId, string message, string username)
         {
             // Call the broadcastMessage method to update clients.
             DAL d = new DAL();
-            d.AddParam("username", name);
+            d.AddParam("userId", userId);
             d.AddParam("message", message);
             d.ExecuteNonQuery("spSaveMessage");
-            Clients.All.broadcastMessage(name, message);
+            Clients.All.broadcastMessage(username, message);
         }
 
         public void SaveUser(string username)
         {
             DAL d = new DAL();
             d.AddParam("username", username);
-            d.ExecuteNonQuery("spSaveUser");
+            Clients.Caller.setUserId(int.Parse(d.ExecuteScalar("spSaveUser")));
         }
     }
 }
