@@ -19,7 +19,7 @@
 <body>
     <form id="form1" runat="server" onsubmit="return false">
     <div>
-        <!--Script references. -->
+    <!--Script references. -->
     <!--Reference the jQuery library. -->
     <script src="Scripts/jquery-2.1.0.min.js"></script>
     <!--Reference the SignalR library. -->
