@@ -14,6 +14,7 @@
             margin: 20px;
         }
     </style>
+    <link href="Content/themes/base/all.css" rel="stylesheet" />
     <link href="Content/themes/base/dialog.css" rel="stylesheet" />
 </head>
 <body>
@@ -48,19 +49,8 @@
                     + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
             };
             // Get the user name and store it to prepend to messages.
-            //$('#displayname').val(prompt('Enter your name:', ''));
             $('#getname').dialog({
-                buttons: [
-                    {
-                        text: "OK",
-                        icons: {
-                            primary: "ui-icon-heart"
-                        },
-                        click: function () {
-                            $(this).dialog("close");
-                        }
-                    }
-                ]
+                modal: true
             });
             // Set initial focus to message input box.
             $('#message').focus();
@@ -74,7 +64,19 @@
 
             // Start the connection.
             $.connection.hub.start().done(function () {
-                chat.server.saveUser($('#displayname').val());
+                $('#savename').click(function () {
+                    if ($('#displayname').val() != "" && ($('#displayname').val() != null))
+                    {
+                        chat.server.saveUser($('#displayname').val());
+                        $('#lblerror').val("");
+                        $('#getname').dialog("close");
+                    }
+                    else
+                    {
+                        $('#lblerror').text("Please input a name to continue");
+                    }
+                    
+                });
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub.
                     chat.server.send($('#userId').val(), $('#message').val(), $('#displayname').val());
@@ -87,9 +89,10 @@
      <div class="container">
         <input type="text" id="message" />
         <input type="button" id="sendmessage" value="Send" />
-        <div id="getname" class="ui-dialog">
-            <input type="text" id="displayname" />
-
+        <div id="getname" title="Enter Name">
+            <input type="text" id="displayname" placeholder="Enter Name" />
+            <input type="button" id="savename" value="OK" /><br />
+            <span id="lblerror" style="color:red"></span>
         </div>
         <input type="hidden" id="userId" />
         <ul id="discussion" runat="server">
