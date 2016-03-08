@@ -9,7 +9,8 @@ go
 
 CREATE TABLE tbUsers
 (
-username VARCHAR(50) PRIMARY KEY,
+userId INT PRIMARY KEY IDENTITY(0,1),
+username VARCHAR(50),
 timeCreated DATETIME,
 dateCreated DATETIME
 )
@@ -17,7 +18,7 @@ dateCreated DATETIME
 
 CREATE TABLE tbMessages
 (
-username VARCHAR(50) FOREIGN KEY REFERENCES tbUsers(username),
+userId INT FOREIGN KEY REFERENCES tbUsers(userId),
 message VARCHAR(500),
 timeSent DATETIME
 )
@@ -27,18 +28,19 @@ go
 
 CREATE PROCEDURE spGetMessages
 AS BEGIN
-	SELECT M.username, message, timeSent
-	FROM tbMessages M
+	SELECT U.username, message, timeSent
+	FROM tbMessages M join
+		 tbUsers U on M.userId = U.userId
 END
 GO
 
 CREATE PROCEDURE spSaveMessage
 (
-@username VARCHAR(50),
+@userId VARCHAR(50),
 @message VARCHAR(500)
 )
 AS BEGIN
-	INSERT INTO tbMessages (username,message,timeSent) VALUES (@username,@message,CONVERT(TIME,GETDATE()))
+	INSERT INTO tbMessages (userId,message,timeSent) VALUES (@userId,@message,CONVERT(TIME,GETDATE()))
 END
 GO
 
@@ -48,8 +50,10 @@ CREATE PROCEDURE spSaveUser
 )
 AS BEGIN
 	INSERT INTO tbUsers (username, timeCreated, dateCreated) VALUES (@username,CONVERT(TIME,GETDATE()),CONVERT(DATE,GETDATE(),101))
+	SELECT SCOPE_IDENTITY()
 END
 GO
 
 select * from tbUsers
 exec spGetMessages
+select * from tbMessages
