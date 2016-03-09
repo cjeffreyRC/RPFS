@@ -26,21 +26,34 @@ timeSent DATETIME
 go
 --Procedures
 
+CREATE PROCEDURE spGetUsernameAndSaveMessage
+(
+@userId INT,
+@message VARCHAR(500)
+)
+AS BEGIN
+	BEGIN TRANSACTION 
+		BEGIN TRY
+			INSERT INTO tbMessages (userId,message,timeSent) VALUES (@userId,@message,CONVERT(TIME,GETDATE()))
+
+			SELECT username
+			FROM tbUsers
+			WHERE userId = @userId
+
+			COMMIT TRANSACTION
+		END TRY
+		BEGIN CATCH
+			ROLLBACK TRANSACTION 
+			SELECT 0
+		END CATCH
+END
+GO
+
 CREATE PROCEDURE spGetMessages
 AS BEGIN
 	SELECT U.username, message, timeSent
 	FROM tbMessages M join
 		 tbUsers U on M.userId = U.userId
-END
-GO
-
-CREATE PROCEDURE spSaveMessage
-(
-@userId VARCHAR(50),
-@message VARCHAR(500)
-)
-AS BEGIN
-	INSERT INTO tbMessages (userId,message,timeSent) VALUES (@userId,@message,CONVERT(TIME,GETDATE()))
 END
 GO
 
@@ -54,6 +67,7 @@ AS BEGIN
 END
 GO
 
-select * from tbUsers
-exec spGetMessages
-select * from tbMessages
+--select * from tbUsers
+--exec spGetMessages
+--select * from tbMessages
+--exec spGetUsernameAndSaveMessage 0, 'hello'

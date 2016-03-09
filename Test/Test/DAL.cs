@@ -20,7 +20,7 @@ namespace Test
         /// <param name="connString">A string parameter to indicate the database to connect to.</param>
         public DAL()
         {
-            ConnString = "Data Source=.;Initial Catalog=test;Integrated Security=SSPI"; // Set the internal variable ConnString to the value of the user chosen value connString
+            ConnString = "Data Source=.\\SQLEXPRESS;Initial Catalog=test;Integrated Security=SSPI"; // Set the internal variable ConnString to the value of the user chosen value connString
             _parameters = new List<SqlParameter>(); // initialize our list of parameters to 0
         }
 

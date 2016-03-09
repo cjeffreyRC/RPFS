@@ -9,14 +9,17 @@ namespace Test
 {
     public class ChatHub : Hub
     {
-        public void Send(string userId, string message, string username)
+        public void Send(string userId, string message)
         {
             // Call the broadcastMessage method to update clients.
             DAL d = new DAL();
             d.AddParam("userId", userId);
             d.AddParam("message", message);
-            d.ExecuteNonQuery("spSaveMessage");
-            Clients.All.broadcastMessage(username, message);
+            string username = d.ExecuteScalar("spGetUsernameAndSaveMessage");
+            if (username != "0")
+            {
+                Clients.All.broadcastMessage(username, message);
+            }
         }
 
         public void SaveUser(string username)

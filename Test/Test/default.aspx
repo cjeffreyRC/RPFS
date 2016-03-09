@@ -50,7 +50,13 @@
             };
             // Get the user name and store it to prepend to messages.
             $('#getname').dialog({
-                modal: true
+                modal: true,
+                beforeClose: function (event,ui) {
+                        if ($('#displayname').val() == "" || ($('#displayname').val() == null))
+                        {
+                            return false;
+                        }
+                    }                
             });
             // Set initial focus to message input box.
             $('#message').focus();
@@ -79,7 +85,7 @@
                 });
                 $('#sendmessage').click(function () {
                     // Call the Send method on the hub.
-                    chat.server.send($('#userId').val(), $('#message').val(), $('#displayname').val());
+                    chat.server.send($('#userId').val(), $('#message').val());
                     // Clear text box and reset focus for next comment.
                     $('#message').val('').focus();
                 });
