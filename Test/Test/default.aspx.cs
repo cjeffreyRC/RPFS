@@ -12,15 +12,15 @@ namespace Test
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //DAL d = new DAL();
-            //DataSet ds = d.ExecuteProcedure("spGetMessages");
+            DAL d = new DAL();
+            DataSet ds = d.ExecuteProcedure("spGetMessages");
 
-            //foreach (DataRow row in ds.Tables[0].Rows)
-            //{
-            //    string name = row["username"].ToString();
-            //    string message = row["message"].ToString();
-            //    discussion.InnerHtml += "<li><strong>" + name +  "</strong>:&nbsp;&nbsp;" + message + "</li>";
-            //}
+            foreach (DataRow row in ds.Tables[0].Rows)
+            {
+                string name = row["username"].ToString();
+                string message = row["message"].ToString();
+                discussion.InnerHtml += "<li><strong>" + name + "</strong>:&nbsp;&nbsp;" + message + "</li>";
+            }
         }
     }
 }
