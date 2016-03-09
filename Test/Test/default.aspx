@@ -29,7 +29,7 @@
     <script src="signalr/hubs"></script>
 
     <script src="Scripts/jquery-ui-1.11.4.min.js"></script>
-
+    <script src="Scripts/jquery-ui-touch-punch.js"></script>
     <!--Add script to update the page and send messages.-->
     <script type="text/javascript">
         $(function () {
