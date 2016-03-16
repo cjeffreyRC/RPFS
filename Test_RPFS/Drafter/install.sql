@@ -74,20 +74,25 @@ playerPosition int foreign key references tbPositions(positionId),
 playerType varchar(10),
 playerTeam int foreign key references tbTeams(teamId)
 )
+
+CREATE TABLE tbRooms
+(
+roomId INT PRIMARY KEY IDENTITY(0,1),
+startTime VARCHAR(100),
+leagueId INT FOREIGN KEY REFERENCES tbLeagues(leagueId),
+isActive BIT
+)
+
+CREATE TABLE tbRoomUsers
+(
+teamId INT FOREIGN KEY REFERENCES tbUsers(userId),
+roomId INT FOREIGN KEY REFERENCES tbRooms(roomId)
+)
+
 --Getting all players from excel sheet and loading into players table
 BULK
 INSERT tbPlayers
-FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\forwards.csv'
-WITH
-(
-FIELDTERMINATOR = ',',
-ROWTERMINATOR = '\n'
-)
-GO
-select * from tbPlayers
-BULK
-INSERT tbPlayers
-FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\defenders.csv'
+FROM 'C:\Users\robjx_000\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\forwards.csv' --'C:\Users\Chris\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\forwards.csv'
 WITH
 (
 FIELDTERMINATOR = ',',
@@ -96,7 +101,16 @@ ROWTERMINATOR = '\n'
 GO
 BULK
 INSERT tbPlayers
-FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\goalies.csv'
+FROM 'C:\Users\robjx_000\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\defenders.csv'--'C:\Users\Chris\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\defenders.csv'
+WITH
+(
+FIELDTERMINATOR = ',',
+ROWTERMINATOR = '\n'
+)
+GO
+BULK
+INSERT tbPlayers
+FROM 'C:\Users\robjx_000\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\goalies.csv'--'C:\Users\Chris\Desktop\Repositories\RPFS\Test_RPFS\Drafter\Rosters\NHL16_PlayerList\goalies.csv'
 WITH
 (
 FIELDTERMINATOR = ',',
@@ -108,6 +122,36 @@ GO
 
 --</TABLES>
 --<PROCEDURES>
+CREATE PROCEDURE spCreateTeam
+(
+@userId INT,
+@leagueId INT
+)
+AS BEGIN
+	INSERT INTO tbTeams (teamName, teamUserId, teamLeagueId) VALUES ((SELECT userFirstName FROM tbUsers WHERE userId = @userId)+ '''s team',@userId,@leagueId)
+END
+GO
+
+CREATE PROCEDURE spAddTeamToRoom
+(
+@teamId INT,
+@roomId INT
+)
+AS BEGIN
+	INSERT INTO tbRoomUsers (teamId, roomId) VALUES (@teamId, @roomId)
+END
+GO
+
+CREATE PROCEDURE spAddRoom
+(
+@startTime VARCHAR(100),
+@leagueId INT
+)
+AS BEGIN
+	INSERT INTO tbRooms (startTime, leagueId, isActive) VALUES (@startTime, @leagueId, 1)
+END
+GO
+
 CREATE PROCEDURE spGetAvailablePlayers
 as begin
 	select playerName,playerOriginalTeam,playerOverall,positionName,playerType,teamName

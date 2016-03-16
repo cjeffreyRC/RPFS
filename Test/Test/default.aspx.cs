@@ -14,9 +14,10 @@ namespace Test
         {
             DAL d = new DAL();
             DataSet ds = d.ExecuteProcedure("spGetMessages");
-
-            foreach (DataRow row in ds.Tables[0].Rows)
+            
+            for (int i = ds.Tables[0].Rows.Count; i > 0; i--)
             {
+                DataRow row = ds.Tables[0].Rows[i-1];
                 string name = row["username"].ToString();
                 string message = row["message"].ToString();
                 discussion.InnerHtml += "<li><strong>" + name + "</strong>:&nbsp;&nbsp;" + message + "</li>";

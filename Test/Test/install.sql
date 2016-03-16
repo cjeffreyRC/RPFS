@@ -67,9 +67,9 @@ AS BEGIN
 END
 GO
 
---DELETE FROM tbMessages
---DELETE FROM tbUsers
---select * from tbUsers
---exec spGetMessages
---select * from tbMessages
---exec spGetUsernameAndSaveMessage 0, 'hello'
+DELETE FROM tbMessages
+DELETE FROM tbUsers
+select * from tbUsers
+exec spGetMessages
+select * from tbMessages
+exec spGetUsernameAndSaveMessage 0, 'hello'
