@@ -162,6 +162,18 @@ as begin
 end
 go
 
+CREATE PROCEDURE spGetSports
+AS BEGIN
+	SELECT * FROM tbSports
+END
+GO
+
+CREATE PROCEDURE spGetUsers
+AS BEGIN
+	SELECT userId, userFirstName + ' ' +userLastName as username FROM tbUsers
+END
+GO
+
 --</PROCEDURES>
 
 exec spGetAvailablePlayers

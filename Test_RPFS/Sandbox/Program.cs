@@ -10,9 +10,8 @@ namespace Sandbox
     {
         static void Main(string[] args)
         {
-            DateTime dt = new DateTime(2016, 03, 16, 18, 09, 37);
-            
-            Console.WriteLine(dt.DayOfWeek + " " + dt.ToLongDateString() + " " + dt.ToShortTimeString());
+            DateTime dt = DateTime.Now;
+            Console.WriteLine(dt);
             Console.ReadLine();
         }
     }

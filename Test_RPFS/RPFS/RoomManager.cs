@@ -12,7 +12,7 @@ namespace RPFS
         public static void CreateRoom(DateTime startTime)
         {
             DAL d = new DAL();
-            d.AddParam("startTime", startTime.);
+
         }
     }
 }

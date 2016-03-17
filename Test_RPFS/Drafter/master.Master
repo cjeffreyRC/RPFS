@@ -11,6 +11,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
         <h1>RPFS Drafter</h1><br />
         <asp:LinkButton ID="lnkHome" runat="server" Text="Home" PostBackUrl="~/default.aspx"></asp:LinkButton>
         <asp:LinkButton ID="lnkRooms" runat="server" Text="Rooms" PostBackUrl="~/rooms.aspx"></asp:LinkButton>
