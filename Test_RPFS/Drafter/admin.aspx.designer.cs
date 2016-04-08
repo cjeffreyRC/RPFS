@@ -58,6 +58,24 @@ namespace Drafter {
         protected global::System.Web.UI.WebControls.Panel pnlNewRoom;
         
         /// <summary>
+        /// hfRoomId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfRoomId;
+        
+        /// <summary>
+        /// rblTypes control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButtonList rblTypes;
+        
+        /// <summary>
         /// ddlSports control.
         /// </summary>
         /// <remarks>
@@ -76,13 +94,58 @@ namespace Drafter {
         protected global::MKB.TimePicker.TimeSelector tsTime;
         
         /// <summary>
-        /// cblRoomUsers control.
+        /// rowDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBoxList cblRoomUsers;
+        protected global::System.Web.UI.HtmlControls.HtmlTableCell rowDate;
+        
+        /// <summary>
+        /// txtDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtDate;
+        
+        /// <summary>
+        /// imgCal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image imgCal;
+        
+        /// <summary>
+        /// divCal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divCal;
+        
+        /// <summary>
+        /// calDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar calDate;
+        
+        /// <summary>
+        /// cblLeagueUsers control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cblLeagueUsers;
         
         /// <summary>
         /// btnSaveRoom control.

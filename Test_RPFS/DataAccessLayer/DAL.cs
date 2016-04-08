@@ -17,7 +17,7 @@ namespace DataAccessLayer
         /// <param name="connString">A string parameter to indicate the database to connect to.</param>
         public DAL()
         {
-            ConnString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=RPFS;Integrated Security=SSPI"; // Set the internal variable ConnString to the value of the user chosen value connString
+            ConnString = "Data Source=localhost"/*\\SQLEXPRESS*/+";Initial Catalog=RPFS;Integrated Security=SSPI"; // Set the internal variable ConnString to the value of the user chosen value connString
             _parameters = new List<SqlParameter>(); // initialize our list of parameters to 0
         }
 
@@ -63,7 +63,7 @@ namespace DataAccessLayer
             conn.Open();
             da.Fill(dsResult);
             conn.Close();
-
+            ClearParams();
             return dsResult;
         }
 
@@ -83,7 +83,7 @@ namespace DataAccessLayer
             conn.Open();
             string result = cmd.ExecuteScalar().ToString();
             conn.Close();
-
+            ClearParams();
             return result;
         }
 
@@ -103,6 +103,7 @@ namespace DataAccessLayer
             conn.Open();
             cmd.ExecuteNonQuery();
             conn.Close();
+            ClearParams();
         }
 
         /// <summary>
