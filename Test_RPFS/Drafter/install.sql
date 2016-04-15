@@ -165,6 +165,9 @@ CREATE PROCEDURE spCreateFreeAgency
 )
 AS BEGIN
 	EXEC spCreateTeam 0, @leagueId
+	UPDATE tbTeams SET 
+			teamName = 'FREE AGENCY'+@leagueId
+	WHERE teamId = SCOPE_IDENTITY()
 END
 GO
 
@@ -206,8 +209,8 @@ AS BEGIN
 SET XACT_ABORT ON
 	EXEC spCreateLeague @sportId, @leagueTypeId
 	DECLARE @leagueId INT = @@IDENTITY
-	INSERT INTO tbRooms (startDateTime, leagueId, isActive) VALUES (@startDateTime, @leagueId, 1)
 	EXEC spCreateFreeAgency @leagueId
+	INSERT INTO tbRooms (startDateTime, leagueId, isActive) VALUES (@startDateTime, @leagueId, 1)
 	SELECT SCOPE_IDENTITY()
 END
 GO
@@ -228,6 +231,17 @@ SET XACT_ABORT ON
 	UPDATE tbLeagues SET
 			leagueSport = @sportId,
 			leagueType = @leagueTypeId
+END
+GO
+
+CREATE PROCEDURE spCloseRoom
+(
+@roomId INT
+)
+AS BEGIN
+	UPDATE tbRooms SET
+			isActive = 0
+	WHERE roomId = @roomId
 END
 GO
 
@@ -275,10 +289,16 @@ GO
 
 CREATE PROCEDURE spGetRooms
 AS BEGIN
-	SELECT roomId,
-		   startDateTime,
-		   leagueId
-	FROM tbRooms
+	SELECT R.roomId,
+		   R.leagueId,
+		   R.startDateTime,
+		   S.sportName,
+		   LT.leagueType
+	FROM tbRooms R join 
+		 tbLeagues L ON R.leagueId = L.leagueId JOIN
+		 tbSports S ON L.leagueSport = S.sportId JOIN
+		 tbLeagueTypes LT ON L.leagueType = LT.leagueTypeId
+	WHERE R.isActive = 1
 END
 GO
 
@@ -307,6 +327,17 @@ AS BEGIN
 	WHERE teamLeagueId = (SELECT leagueId
 						  FROM tbRooms
 						  WHERE roomId = @roomId)
+END
+GO
+
+CREATE PROCEDURE spGetUsername
+(
+@userId INT
+)
+AS BEGIN
+	SELECT userFirstName + ' ' + userLastname AS username
+	FROM tbUsers
+	WHERE userId = @userId
 END
 GO
 

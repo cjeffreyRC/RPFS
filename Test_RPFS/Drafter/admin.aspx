@@ -15,8 +15,15 @@
         </asp:GridView><br />
         <asp:Button ID="btnNewRoom" runat="server" Text="New Room" OnClick="btnNewRoom_Click" />
         <asp:Panel ID="pnlNewRoom" runat="server" Visible="false">
-            <asp:HiddenField ID="hfRoomId" runat="server" />
             <table>
+                <tr>
+                    <td>
+                        Room Id:
+                    </td>
+                    <td>
+                        <asp:Label ID="lblRoomId" runat="server"></asp:Label>
+                    </td>
+                </tr>
                 <tr>
                     <td>
                         Type:
@@ -56,7 +63,10 @@
             <h5>Users to Include</h5>
             <asp:CheckBoxList ID="cblLeagueUsers" runat="server"></asp:CheckBoxList>
             <asp:Button ID="btnSaveRoom" Text="Save" runat="server" OnClick="btnSaveRoom_Click" />
-            <asp:Button ID="BtnCancelRoom" Text="Cancel" runat="server" OnClick="BtnCancelRoom_Click" />
+            <asp:Button ID="BtnCancelRoom" Text="Cancel" runat="server" OnClick="BtnCancelRoom_Click" /><br />
+            <div id="divDelete" runat="server" visible="false">
+                <asp:LinkButton ID="lnkDelete" runat="server" Text="Click Here" OnClick="lnkDelete_Click" ></asp:LinkButton> to delete room.
+            </div>
         </asp:Panel>
     </asp:Panel>
     <asp:Panel ID="pnlUsers" runat="server" Visible="false">
@@ -73,6 +83,9 @@
             $('#<%= rowDate.ClientID%>').click(function () {
                 $('#<%= divCal.ClientID%>').slideToggle();
             })
+
+            $('#body').css('min-height', screen.height);
+            $('#body').css('min-width', screen.width);
         })
     </script>
 </asp:Content>

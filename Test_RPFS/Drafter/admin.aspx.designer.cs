@@ -58,13 +58,13 @@ namespace Drafter {
         protected global::System.Web.UI.WebControls.Panel pnlNewRoom;
         
         /// <summary>
-        /// hfRoomId control.
+        /// lblRoomId control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfRoomId;
+        protected global::System.Web.UI.WebControls.Label lblRoomId;
         
         /// <summary>
         /// rblTypes control.
@@ -164,6 +164,24 @@ namespace Drafter {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button BtnCancelRoom;
+        
+        /// <summary>
+        /// divDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divDelete;
+        
+        /// <summary>
+        /// lnkDelete control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkDelete;
         
         /// <summary>
         /// pnlUsers control.

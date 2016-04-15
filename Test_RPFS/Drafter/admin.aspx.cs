@@ -18,24 +18,10 @@ namespace Drafter
             {
                 DAL d = new DAL();
                 LoadListControl(ddlSports, "sportname", "sportId", d.ExecuteProcedure("spGetSports"));
-                //ddlSports.DataSource = d.ExecuteProcedure("spGetSports");
-                //ddlSports.DataTextField = "sportName";
-                //ddlSports.DataValueField = "sportId";
-                //ddlSports.DataBind();
-
                 LoadListControl(cblLeagueUsers, "username", "userId", d.ExecuteProcedure("spGetAllUsers"));
-                //cblLeagueUsers.DataSource = d.ExecuteProcedure("spGetAllUsers");
-                //cblLeagueUsers.DataTextField = "username";
-                //cblLeagueUsers.DataValueField = "userId";
-                //cblLeagueUsers.DataBind();
-
                 LoadListControl(rblTypes, "leagueType", "leagueTypeId", d.ExecuteProcedure("spGetLeagueTypes"));
-                //rblTypes.DataSource = d.ExecuteProcedure("spGetLeagueTypes");
-                //rblTypes.DataTextField = "leagueType";
-                //rblTypes.DataValueField = "leagueTypeId";
-                //rblTypes.DataBind();
-                gvRooms.DataSource = d.ExecuteProcedure("spGetRooms");
-                gvRooms.DataBind();
+
+                LoadRooms();
 
                 tsTime.SetTime(6, 00, TimeSelector.AmPmSpec.PM);
             }
@@ -57,6 +43,21 @@ namespace Drafter
             }
             
         }
+        private void LoadRooms()
+        {
+            DAL d = new DAL();
+            gvRooms.DataSource = d.ExecuteProcedure("spGetRooms");
+            gvRooms.DataBind();
+        }
+
+        private void SetRoomFormToDefaultValues()
+        {
+            ddlSports.SelectedIndex = 0;
+            cblLeagueUsers.SelectedIndex = -1;
+            rblTypes.SelectedIndex = 1;
+            lblRoomId.Text = "NEW";
+            divDelete.Visible = false;
+        }
 
         protected void btnRooms_Click(object sender, EventArgs e)
         {
@@ -68,15 +69,15 @@ namespace Drafter
         protected void btnNewRoom_Click(object sender, EventArgs e)
         {
             pnlNewRoom.Visible = true;
+            btnNewRoom.Visible = false;
+            SetRoomFormToDefaultValues();
         }
 
         protected void BtnCancelRoom_Click(object sender, EventArgs e)
         {
+            SetRoomFormToDefaultValues();
             pnlNewRoom.Visible = false;
-            ddlSports.SelectedIndex = 0;
-            cblLeagueUsers.SelectedIndex = -1;
-            rblTypes.SelectedIndex = 1;
-            hfRoomId.Value = "";
+            btnNewRoom.Visible = true;
         }
 
         protected void btnSaveRoom_Click(object sender, EventArgs e)
@@ -86,13 +87,13 @@ namespace Drafter
             d.AddParam("startDateTime", new DateTime(calDate.SelectedDate.Year, calDate.SelectedDate.Month, calDate.SelectedDate.Day, tsTime.Hour, tsTime.Minute, tsTime.Second));
             d.AddParam("leagueTypeId", rblTypes.SelectedValue);
             string roomId = "";
-            if (hfRoomId.Value == "")
+            if (lblRoomId.Text == "NEW")
             {
                 roomId = d.ExecuteScalar("spAddRoom");
             }
             else
             {
-                roomId = hfRoomId.Value;
+                roomId = lblRoomId.Text;
                 d.AddParam("roomId", roomId);
                 d.ExecuteNonQuery("spUpdateRoom");
             }
@@ -127,6 +128,9 @@ namespace Drafter
                     }
                 }
             }
+            LoadRooms();
+            btnNewRoom.Visible = false;
+            SetRoomFormToDefaultValues();
         }
 
         protected void calDate_SelectionChanged(object sender, EventArgs e)
@@ -148,8 +152,17 @@ namespace Drafter
 
         }
 
-        public void EditRoom(int roomId)
+        private void CloseRoom(int roomId)
         {
+            DAL d = new DAL();
+            d.AddParam("roomId", roomId);
+            d.ExecuteNonQuery("spCloseRoom");
+            //System.Windows.Forms.MessageBox.Show();
+        }
+
+        private void EditRoom(int roomId)
+        {
+            divDelete.Visible = true;
             pnlNewRoom.Visible = true;
             DAL d = new DAL();
             d.AddParam("roomId", roomId);
@@ -158,11 +171,12 @@ namespace Drafter
             DateTime dt = Convert.ToDateTime(dr["startDateTime"].ToString());
 
             calDate.SelectedDate = dt;
+            txtDate.Text = calDate.SelectedDate.ToLongDateString();
             tsTime.SetTime(dt.Hour, dt.Minute, TimeSelector.AmPmSpec.PM);
 
             ddlSports.SelectedValue = dr["sportId"].ToString();
             rblTypes.SelectedValue = dr["leagueTypeId"].ToString();
-            hfRoomId.Value = roomId.ToString();
+            lblRoomId.Text = roomId.ToString();
 
             cblLeagueUsers.DataSource = d.ExecuteProcedure("spGetAllUsers");
             cblLeagueUsers.DataTextField = "username";
@@ -182,6 +196,16 @@ namespace Drafter
                     }
                 }
             }
+        }
+
+        protected void lnkDelete_Click(object sender, EventArgs e)
+        {
+            if (lblRoomId.Text != "NEW")
+            {
+                CloseRoom(int.Parse(lblRoomId.Text));
+            }
+            SetRoomFormToDefaultValues();
+            pnlNewRoom.Visible = false;
         }
     }
 }

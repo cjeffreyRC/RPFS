@@ -29,17 +29,17 @@
     <script src="signalr/hubs"></script>
 
     <script src="Scripts/jquery-ui-1.11.4.min.js"></script>
-    <script src="Scripts/jquery-ui-touch-punch.js"></script>
     <!--Add script to update the page and send messages.-->
     <script type="text/javascript">
         $(function () {
             // Declare a proxy to reference the hub.
             var chat = $.connection.chatHub;
 
+            // Create functions that the hub can call to broadcast messages.
             chat.client.setUserId = function (Id) {
                 $('#userId').val(Id);
             };
-            // Create a function that the hub can call to broadcast messages.
+           
             chat.client.broadcastMessage = function (name, message) {
                 // Html encode display name and message.
                 var encodedName = $('<div />').text(name).html();
