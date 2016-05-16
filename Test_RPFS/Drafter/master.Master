@@ -15,6 +15,7 @@
         <script src="Scripts/jquery-2.2.1.min.js"></script>
         <script src="Scripts/jquery-ui-1.11.4.min.js"></script>
         <script src="Scripts/bootstrap.min.js"></script>
+        <link href="Content/bootstrap.min.css" rel="stylesheet" />
         <h1>RPFS Drafter</h1><br />
         <asp:LinkButton ID="lnkHome" runat="server" Text="Home" PostBackUrl="~/default.aspx"></asp:LinkButton>
         <asp:LinkButton ID="lnkRooms" runat="server" Text="Rooms" PostBackUrl="~/rooms.aspx"></asp:LinkButton>
