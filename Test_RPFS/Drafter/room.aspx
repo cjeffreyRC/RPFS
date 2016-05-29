@@ -4,6 +4,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title></title>
 </head>
 <body>
@@ -20,10 +21,9 @@
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
 
 
-        <div id="tbContainer" class="container" runat="server">
-
-        </div>
-
+    
+    </div>
+    <div>
     <script type="text/javascript">
         $(function () {
             // Declare a proxy to reference the hub.
