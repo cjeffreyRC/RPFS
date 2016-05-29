@@ -35,7 +35,8 @@ playerPickTrades int,
 multiTeamTrades int,
 dragNDrop int,
 autoDraft int foreign key references tbAutoDraft(value),
-chat int foreign key references tbChat(value)
+chat int foreign key references tbChat(value),
+comment varchar(1000)
 )
 
 go
@@ -62,11 +63,12 @@ create procedure spSave
 @multiTeamTrades int,
 @dragNDrop int,
 @autoDraft int,
-@chat int
+@chat int,
+@comment varchar(1000)
 )
 as begin
-	insert into tbValues (firstName,lastName,pickTrades,playerTrades,playerPickTrades,multiTeamTrades,dragNDrop,autoDraft,chat) values 
-						(@firstName,@lastName,@pickTrades,@playerTrades,@playerPickTrades,@multiTeamTrades,@dragNDrop,@autoDraft,@chat)
+	insert into tbValues (firstName,lastName,pickTrades,playerTrades,playerPickTrades,multiTeamTrades,dragNDrop,autoDraft,chat,comment) values 
+						(@firstName,@lastName,@pickTrades,@playerTrades,@playerPickTrades,@multiTeamTrades,@dragNDrop,@autoDraft,@chat,@comment)
 end
 go
 
@@ -89,7 +91,7 @@ go
 
 create procedure spGetTotalValues
 as begin
-	Select firstName,lastName,pickTrades,playerTrades,playerPickTrades,multiTeamTrades,dragNDrop,autoDraft,chat from tbValues V join
+	Select firstName,lastName,pickTrades,playerTrades,playerPickTrades,multiTeamTrades,dragNDrop,autoDraft,chat,comment from tbValues V join
 				  tbAutoDraft A on V.autoDraft = A.value join
 				  tbChat C on V.chat = C.value
 end
