@@ -117,6 +117,10 @@
         </p>
         <asp:RadioButtonList ID="rblChat" runat="server">
         </asp:RadioButtonList>
+        <br />
+        <p>Any other thoughts or suggestions please leave a detailed comment.</p>
+        <asp:TextBox ID="txtComment" runat="server" TextMode="MultiLine" placeholder="Comments"></asp:TextBox>
+        <br />
         <asp:Button ID="btnGo" runat="server" Text="Submit" OnClick="btnGo_Click" />
     </div>
 

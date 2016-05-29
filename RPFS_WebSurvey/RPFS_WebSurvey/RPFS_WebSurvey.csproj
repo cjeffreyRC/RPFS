@@ -127,7 +127,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>5986</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:5986/</IISUrl>
+          <IISUrl>http://localhost:5988/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

@@ -48,6 +48,7 @@ namespace RPFS_WebSurvey
                 d.AddParam("dragNDrop", txtQDragNDrop.Text);
                 d.AddParam("autoDraft", rblAutoDraft.SelectedValue);
                 d.AddParam("chat", rblChat.SelectedValue);
+                d.AddParam("comment", txtComment.Text);
                 d.ExecuteNonQuery("spSave");
 
                 Response.Redirect("results.aspx");
