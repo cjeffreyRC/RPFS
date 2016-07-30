@@ -1,0 +1,163 @@
+Player Id,Pick #,Team Id,Player Name,Position,Overall,Original Team,Player Of Game Count
+0,9,10,Lebron James,2,97,13 Heat,0
+1,20,10,Russell Westbrook,0,94,Thunder,0
+2,31,10,Demarcus Cousins,4,90,Kings,0
+3,42,10,David Robinson,4,90,98 Spurs,0
+4,53,10,Elgin Baylor,2,91,65 Lakers,0
+5,64,10,Pete Maverich,1,87,71 Hawks,0
+6,75,10,Sam Jones,1,86,04 Pistons,0
+7,86,10,Dennis Rodman,3,85,96 Bulls,0
+8,97,10,Larry Johnson,3,83,93 Hornets,0
+9,108,10,Penny Hardaway,0,85,95 Magic,0
+10,119,10,Jae Crowder,2,81,Celtics,0
+11,130,10,Terry Porter,0,81,91 Trailblazers,0
+12,,10,Andre Igoudala,2,79,10,0
+13,,10,Harrison Barnes,2,77,10,0
+14,,10,Andrew Bogut,4,77,10,0
+15,8,9,Magic Johnson,0,97,87 Lakers,0
+16,16,9,Wilt Chamberlain,4,92,71 Lakers,0
+17,25,9,Vince Carter,1,91,00 Raptors,0
+18,27,9,Draymond Green,3,90,10,0
+19,36,9,Julius Erving,2,93,77 Sixers,0
+20,58,9,Chris Mullin,2,88,91 Warriors,0
+21,69,9,Ben Wallace,4,87,04 Pistons,0
+22,80,9,Deandre Jordan,4,84,Nets,0
+23,91,9,Sam Cassel,0,84,04 Timberwolves,0
+24,102,9,Mitch Richmond,1,84,91 Warriors,0
+25,113,9,Kristaps Porzingis,3,80,Knicks,0
+26,124,9,Danillo Gallinari,2,81,Nuggets,0
+27,,9,Ricky Rubio,0,79,Timber-wolves,0
+28,,9,Noah Vonleh,3,69,Trail Blazers,0
+29,,9,Wally Szczerbiak,2,76,04 Timber-wolves,0
+30,6,8,Shaquille O'Neal,4,96,01 Lakers,0
+31,17,8,James Harden,1,92,8,0
+32,28,8,Damian Lillard,0,89,Train Blazers,0
+33,39,8,Lamarcus Aldridge,3,89,Spurs,0
+34,50,8,Gordon Hayward,2,83,5,0
+35,61,8,Karl-Anthony Towns,4,86,Timberwolves,0
+36,72,8,Chandler Parsons,2,80,Mavs,0
+37,83,8,Kevin Love,3,83,Cavs,0
+38,94,8,Goran Dragic,0,80,3,0
+39,105,8,Khris Middleton,1,81,Bucks,0
+40,116,8,Andrew Wiggins,2,81,Timberwolves,0
+41,127,8,Zach Lavine,1,78,Timberwolves,0
+42,,8,Trevor Ariza,2,76,,0
+43,,8,Matthew Dellavedova,0,76,,0
+44,,8,Channing Frye,3,75,,0
+45,4,7,Kobe Bryant,1,95,01 Lakers,0
+46,15,7,Kawhi Leonard,2,94,Spurs,0
+47,26,7,Yao Ming,4,89,08 Rockets,0
+48,37,7,Chris Bosh,3,85,3,0
+49,48,7,John Wall ,0,89,Wizzards,0
+50,59,7,Hassan Whiteside,4,86,3,0
+51,70,7,Kyle Lowry,0,86,7,0
+52,81,7,Dermar DeRozan,1,88,7,0
+53,92,7,Brook Lopez,4,84,Nets,0
+54,103,7,Paul Pressey,1,83,85 Bucks,0
+55,114,7,Jerry Lucas,3,84,72 Knicks,0
+56,125,7,Loul Deng,2,80,3,0
+57,,7,Demarre Carrol,2,76,,0
+58,,7,Patrick Patterson,3,76,,0
+59,14,6,Hakeem Olajuwon,4,93,94 Rockets,0
+60,19,6,Paul George,2,90,6,0
+61,30,6,Chris Paul,0,92,Clippers,0
+62,41,6,Clyde Drexler,1,89,91 Trailblazers,0
+63,47,6,Paul Millsap,3,87,2,0
+64,52,6,Carmelo Anthony,2,88,Knicks,0
+65,63,6,Kyrie Irving,0,88,Cavaliers,0
+66,74,6,Pau Gasol,4,85,93 Hornets,0
+67,85,6,Eric Bledsoe,1,86,Suns,0
+68,96,6,Jonas Valanciunas,4,83,Toronto,0
+69,107,6,Bob Danridge,2,84,71 Bucks,0
+70,118,6,Zyndrunas Iigausk,4,81,07 Cavaliers,0
+71,129,6,Zach Randolph,3,80,1,0
+72,,6,Latrell Sprewell,2,80,04 Timber-wolves,0
+73,,6,Victor Oladipo,1,79,Magic,0
+74,2,5,Stephen Curry,0,97,10,0
+75,13,5,Steve Nash,0,92,05 Suns,0
+76,24,5,Klay Thompson,1,90,10,0
+77,35,5,Karl Malone,3,90,98 Jazz,0
+78,46,5,Tracey McGrady,1,89,08 Rockets,0
+79,57,5,Dirk Nowitzki,3,88,03 Mavericks,0
+80,68,5,Tim Duncan,4,80,Spurs,0
+81,79,5,John Stockton,0,86,86 Jazz,0
+82,90,5,Kemba Walker,0,84,4,0
+83,101,5,Michael Cooper,1,85,87 Lakers,0
+84,112,5,Brad Daugherty,4,83,90 Cavs,0
+85,123,5,Mugsy Bogues,0,77,93 Hornets,0
+86,,5,Rodney Hood,1,70,,0
+87,,5,Rudy Gobert,4,80,,0
+88,,5,Arvydas Sabonis,4,82,,0
+89,11,4,Kevin Durrant,2,94,Thunder,0
+90,33,4,Gary Payton,0,92,96 Sonics,0
+91,34,4,Anthony Davis,3,91,Pelicans,0
+92,44,4,Kevin McHale,3,90,86 Celtics,0
+93,55,4,Joe Dumars,1,88,89 Pistons,0
+94,66,4,Gail Goodrich,1,86,72 Lakers,0
+95,67,4,Dominique Wilkins,2,89,86 Hawks,0
+96,77,4,Alonzo Mourning,4,85,93 Hornets,0
+97,88,4,Eddie Jones,1,83,98 Lakers,0
+98,99,4,Robert Parish,4,84,86 celtics,0
+99,110,4,George Gervin,2,82,86 Bulls,0
+100,121,4,Dennis Johnson,0,82,86 Celtics,0
+101,132,4,Lou Hudson,2,83,71 Hawks,0
+102,,4,Al Jefferson,4,80,,0
+103,,4,Michael Kidd-Gilchrist,2,79,,0
+104,1,3,Michael Jordan,1,99,96 Bulls,0
+105,12,3,Allen Iverson,1,93,01Sixers,0
+106,22,3,Scottie Pippen,2,92,96 Bulls,0
+107,23,3,Chauncey Billups,0,88,04 Pistons,0
+108,45,3,Dikembe Mutumbo,4,83,94 Nuggets,0
+109,56,3,Andre Drummond,4,89,Pistons,0
+110,78,3,Derrick Favors,3,85,5,0
+111,89,3,James Worthy,2,84,91 Lakers,0
+112,100,3,Kenneth Faried,3,80,Nuggets,0
+113,111,3,Jrue Haliday,0,82,Pelicans,0
+114,122,3,Tyreke Evans,2,81,Pelicans,0
+115,,3,Justice Winslow,2,76,,0
+116,,3,Joe Johnson,2,76,,0
+117,,3,Cory Joseph,0,76,,0
+118,10,2,Larry Bird,2,96,86 Celtics,0
+119,21,2,Jerry West,0,93,71 Lakers,0
+120,32,2,Patrick Ewing,4,90,95 Knicks,0
+121,43,2,Moses Malone,4,90,85 Sixers,0
+122,54,2,Ray Allen,1,87,08 Celtics,0
+123,65,2,Ssidney Moncrief,1,87,85 Bucks,0
+124,76,2,Walt Frazier,0,89,72 Knicks,0
+125,87,2,Harry Cummings,3,83,77 Sixers,0
+126,98,2,Rajon Rondo,0,84,Kings,0
+127,109,2,Reggie Jackson,0,83,Pistons,0
+128,120,2,Dwight Howard,4,83,8,0
+129,131,2,Larry Nance,2,82,90 Cavaliers,0
+130,,2,Al Horford,4,80,,0
+131,,2,Jeff Teague,0,79,,0
+132,,2,Kyle Korver,1,76,,0
+133,3,1,Kareem Abdul-Jabar,4,97,71 Bucks,0
+134,5,1,Kevin Garnett,3,94,04 Timberwolves,0
+135,38,1,Oscar Robertson,0,93,71 Bucks,0
+136,49,1,Giannis Antetokounmpo,2,84,Bucks,0
+137,60,1,Byron Scott,1,84,87 Lakers,0
+138,71,1,Mike Colnoly ,0,83,85 Sixers,0
+139,82,1,C.J. McCollum,1,83,Blazers,0
+140,93,1,Marc Gasol,4,82,1,0
+141,104,1,Nicholas Batum,2,80,4,0
+142,115,1,Tony Allen,1,78,,0
+143,126,1,George Hill,0,76,,0
+144,,1,Michael Finley,2,81,03 Mavericks,0
+145,,1,Patty Mills,0,75,,0
+146,,1,Lance Stephenson,1,75,,0
+147,7,0,Dwayne Wade,1,93,06 Heat,0
+148,18,0,Bill Russell,4,96,65 Celtics,0
+149,29,0,Jimmy Butler,1,88,0,0
+150,40,0,Paul Pierce,2,91,08 Celtics,0
+151,51,0,Blake Griffin,3,88,Clippers,0
+152,62,0,Isiah Thomas,0,89,89 Pistons,0
+153,73,0,Amar'e Stoudamire,3,88,05 Suns,0
+154,84,0,Richard Hamilton,0,86,91 Warriors,0
+155,95,0,Tim Hardaway,0,86,98 Jazz,0
+156,106,0,Shawn Marion,2,85,05 Suns,0
+157,117,0,Willis Reed,4,82,72 Knicks,0
+158,128,0,Derrick Rose,0,80,0,0
+159,,0,Michael Beasly,3,78,,0
+160,,0,Nikola Mirotic,2,75,,0
+161,,0,Norman Powell,1,75,,0

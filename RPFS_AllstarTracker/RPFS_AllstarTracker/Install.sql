@@ -18,7 +18,7 @@ teamId INT PRIMARY KEY IDENTITY(0,1),
 teamName VARCHAR(50),
 teamLocation VARCHAR(50)
 )
-INSERT INTO tbTeams (teamLocation, teamName) VALUES ('Indiana', 'Pacers'),('Houston', 'Rockets'),('Memphis','Grizzlies')
+INSERT INTO tbTeams (teamLocation, teamName) VALUES ('Chicago','Bulls'),('Memphis','Grizzlies'),('Atlanta','Hawks'),('Miami','Heat'),('Charlotte','Hornets'),('Utah','Jazz'),('Indiana','Pacers'),('Toronto','Raptors'),('Minesota','TimberWolves')
 
 CREATE TABLE tbUsers
 (
@@ -40,18 +40,32 @@ positionName varchar(50)
 )
 INSERT INTO tbPositions (positionId, positionName) VALUES (0,'Point Gaurd'),(1,'Shooting Gaurd'),(2,'Small Forward'),(3,'Power Forward'),(4,'Center')
 
+
+--Player Id,Pick #,Team Id,Player Name,Position,Overall,Original Team
 CREATE TABLE tbPlayers
 (
 playerId INT PRIMARY KEY IDENTITY(0,1),
-playerFirstName VARCHAR(50),
-playerLastName VARCHAR(50),
-playerOverall INT,
-playerPosition INT FOREIGN KEY REFERENCES tbPositions(positionId),
+playerDraftPick INT,
 playerTeamId INT FOREIGN KEY REFERENCES tbTeams(teamId),
+playerName VARCHAR(50),
+playerPosition INT FOREIGN KEY REFERENCES tbPositions(positionId),
+playerOverall INT,
+playerOriginalTeam VARCHAR(50),
 playerOfGameCount INT DEFAULT 0
 )
-INSERT INTO tbPlayers (playerFirstName, playerLastName, PlayerOverall, playerPosition, playerTeamId) VALUES ('Paul','George',92,2,0),('Chris','Paul',94,0,0),('Hakeem','Olajowan',95,4,0),('Jimmy','Harden',90,1,1),('Marc','Gasol',84,3,2)
-															
+--INSERT INTO tbPlayers (playerFirstName, playerLastName, PlayerOverall, playerPosition, playerTeamId) VALUES ('Paul','George',92,2,0),('Chris','Paul',94,0,0),('Hakeem','Olajowan',95,4,0),('Jimmy','Harden',90,1,1),('Marc','Gasol',84,3,2)
+
+BULK INSERT tbPlayers
+FROM 'C:\Users\robjx_000\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
+WITH
+(
+	FIRSTROW = 2,
+    FIELDTERMINATOR = ',',  --CSV field delimiter
+    ROWTERMINATOR = '\n'   --Use to shift the control to next row
+)
+
+
+
 go
 --</DATABASE INSTALLATIONS>--
 --<STORED PROCEDURES>--
@@ -86,7 +100,7 @@ GO
 
 CREATE PROCEDURE spGetPlayers
 AS BEGIN
-	SELECT playerFirstName +' ' +playerLastName as playerName, positionName, teamName, playerOfGameCount
+	SELECT playerName, positionName, teamName, playerOfGameCount
 	FROM tbPlayers INNER JOIN 
 		 tbPositions ON positionId = playerPosition inner join
 		 tbTeams ON teamId = playerTeamId
@@ -106,4 +120,6 @@ GO
 --		SELECT '-1'
 --	END
 
+--select * from tbPlayers
+--exec spGetPlayers
 --</TESTING>--
