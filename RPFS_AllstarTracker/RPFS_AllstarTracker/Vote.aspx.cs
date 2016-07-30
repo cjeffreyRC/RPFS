@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using RPFS;
 
@@ -27,8 +27,12 @@ namespace RPFS_AllstarTracker
                 {
                     Response.Redirect("Home.aspx?msg=Must log in to make your vote");
                 }
-                LeftPage.Controls.Add(TableGenerator.CreateTable("spGetPlayers"));
-                RightPage.Controls.Add(TableGenerator.CreateTable("spGetPlayers"));
+                HtmlGenericControl table = TableGenerator.CreateTable("spGetPlayers");
+                foreach (HtmlGenericControl div in table.Controls)
+                {
+                    div.Attributes.Add("draggable", "true");
+                    div.Attributes.Add("ondragstart", "drag(event)");
+                }
             }
         }
 
