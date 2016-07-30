@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using DataAccessLayer;
+using RPFS;
 
 namespace RPFS_AllstarTracker
 {
@@ -24,20 +24,17 @@ namespace RPFS_AllstarTracker
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            DAL d = new DAL();
-            d.AddParam("userEmail", txtEmail.Text);
-            d.AddParam("userPassword", txtPassword.Text);
-            string value = d.ExecuteScalar("spLogin");  //need sp ----- pass: userEmail, userPassword ----- return: -1 or userId
-            Session["userId"] = value;
-
-            if (value == "-1")
+            User newUser = Security.Login(txtEmail.Text, txtPassword.Text);
+            if (newUser.getUserId() == -1)
             {
-                lblError.Text = "Login failed, try again.";
+                lblError.Text = "Login information invalid. Please try again.";
             }
             else
-            {                
+            {
+                Session["user"] = newUser;
                 Response.Redirect("Vote.aspx");
             }
+            
         }
     }
 }

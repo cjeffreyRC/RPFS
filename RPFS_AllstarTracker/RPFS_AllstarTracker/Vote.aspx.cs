@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using RPFS;
 
 namespace RPFS_AllstarTracker
 {
@@ -11,10 +12,25 @@ namespace RPFS_AllstarTracker
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if ((string)Session["userId"] == "-1")
+            if (!IsPostBack)
             {
-                Response.Redirect("Home.aspx?msg=Must log in to make your vote");
+                if (Session["user"] != null)
+                {
+                    User myUser = (User)Session["user"];
+
+                    if (myUser.getUserId() == -1)
+                    {
+                        Response.Redirect("Home.aspx?msg=Must log in to make your vote");
+                    }
+                }
+                else
+                {
+                    Response.Redirect("Home.aspx?msg=Must log in to make your vote");
+                }
+                LeftPage.Controls.Add(TableGenerator.CreateTable("spGetPlayers"));
+                RightPage.Controls.Add(TableGenerator.CreateTable("spGetPlayers"));
             }
         }
+
     }
 }
