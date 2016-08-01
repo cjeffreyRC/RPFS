@@ -13,12 +13,27 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <form id="form1" runat="server">
-    <div>
+    <div ondrop="allowDrop(event)">
         <h1>RPFS Allstar Tracker</h1>
         <asp:Label ID="lblIntro" runat="server" Text="View the current player votes or log in to vote."></asp:Label><br />
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
             
         </asp:ContentPlaceHolder>
+        <script>
+            function allowDrop(ev) {
+                ev.preventDefault();
+            }
+
+            function drag(ev) {
+                ev.dataTransfer.setData("text", ev.target.id);
+            }
+
+            function drop(ev) {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("text");
+                ev.target.appendChild(document.getElementById(data));
+            }
+        </script>
     </div>
     </form>
 </body>

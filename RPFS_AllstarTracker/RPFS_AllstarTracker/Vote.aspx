@@ -7,8 +7,8 @@
     <div id="LeftPage" style="width:49%;float:left" runat="server">
 
     </div>
-    <div id="RightPage" style="width:49%;float:left" runat="server">
-
+    <div id="RightPage" style="width:49%;float:left" ondragover="allowDrop(event)" runat="server">
+        Drop player here to add to list
     </div>
 
     <script>
@@ -22,7 +22,7 @@ function drag(ev) {
 
 function drop(ev) {
     ev.preventDefault();
-    var data = ev.dataTransfer.getData("text");
+    var data = ev.dataTransfer.getData("HtmlControls");
     ev.target.appendChild(document.getElementById(data));
 }
 </script>

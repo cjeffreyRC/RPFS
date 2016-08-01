@@ -33,6 +33,8 @@ namespace RPFS_AllstarTracker
                     div.Attributes.Add("draggable", "true");
                     div.Attributes.Add("ondragstart", "drag(event)");
                 }
+                RightPage.Attributes.Add("ondrop", "drop(event)");
+                LeftPage.Controls.Add(table);
             }
         }
 
