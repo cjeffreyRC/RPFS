@@ -63,6 +63,7 @@ namespace RPFS
         {
             HtmlGenericControl col = new HtmlGenericControl("div");
             col.Attributes.Add("class", "col-xs-3");
+            col.Attributes.Add("ondrop", "return true");
             col.InnerText = colValue.ToString();
             return col;
         }

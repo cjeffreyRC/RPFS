@@ -28,10 +28,14 @@ namespace RPFS_AllstarTracker
                     Response.Redirect("Home.aspx?msg=Must log in to make your vote");
                 }
                 HtmlGenericControl table = TableGenerator.CreateTable("spGetPlayers");
-                foreach (HtmlGenericControl div in table.Controls)
+                for (int i = 0; i < table.Controls.Count; i++)
                 {
+                    HtmlGenericControl div = (HtmlGenericControl)table.Controls[i];
                     div.Attributes.Add("draggable", "true");
                     div.Attributes.Add("ondragstart", "drag(event)");
+                    div.ID = table.Controls[i].Controls[0].ToString()+i;
+                    div.Attributes.Add("ondrop", "return true");
+                    div.Attributes.Add("ondragover", "return true");
                 }
                 RightPage.Attributes.Add("ondrop", "drop(event)");
                 LeftPage.Controls.Add(table);
