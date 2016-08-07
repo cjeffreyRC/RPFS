@@ -7,8 +7,24 @@
     <div id="LeftPage" style="width:49%;float:left" runat="server" ondragover="return true">
 
     </div>
-    <p style="width:49%;float:left" ondragover="allowDrop(event)" ondrop="drop(event)">Drop player here to add to list</p>
-    <div id="RightPage" class="container" style="width:49%;float:left" runat="server">
+    <p style="width:50%;float:left" ondragover="allowDrop(event)" ondrop="drop(event)">Drop player here to add to list</p>
+    <div id="MidPage" class="container" style="width:3%;float:left" runat="server" ondragover="return true">
+        <div class="row"><div class="col-xs-12">12</div></div>
+        <div class="row"><div class="col-xs-12">11</div></div>
+        <div class="row"><div class="col-xs-12">10</div></div>
+        <div class="row"><div class="col-xs-12">9</div></div>
+        <div class="row"><div class="col-xs-12">8</div></div>
+        <div class="row"><div class="col-xs-12">7</div></div>
+        <div class="row"><div class="col-xs-12">6</div></div>
+        <div class="row"><div class="col-xs-12">5</div></div>
+        <div class="row"><div class="col-xs-12">4</div></div>
+        <div class="row"><div class="col-xs-12">3</div></div>
+        <div class="row"><div class="col-xs-12">2</div></div>
+        <div class="row"><div class="col-xs-12">1</div></div>
+
+    </div>
+    
+    <div id="RightPage" class="container" style="width:47%;float:left" runat="server">
         
     </div>
     <script>
@@ -36,10 +52,10 @@ function drop(ev) {
     var btnUp = document.createElement("input");
     btnUp.setAttribute("type", "button");
     btnUp.setAttribute("id", "btnUp");
-    btnUp.setAttribute("value", "/\\");
-    btnUp.onclick = function () {
-
-    };
+    btnUp.setAttribute("name", "btnUp");
+    btnUp.setAttribute("value", "Up");
+    btnUp.setAttribute("style", "height:15px");
+    btnUp.setAttribute("onclick","moveUp(this)")
     colUp.appendChild(btnUp);
 
 
@@ -50,23 +66,38 @@ function drop(ev) {
     var btnDown = document.createElement("input");
     btnDown.setAttribute("type", "button");
     btnDown.setAttribute("id", "btnDown");
-    btnDown.setAttribute("value", "\\/");
-    btnDown.onclick = function () {
-
-    };
+    btnDown.setAttribute("name", "btnDown");
+    btnDown.setAttribute("value", "Down");
+    btnDown.setAttribute("style", "height:15px");
+    btnDown.setAttribute("onclick", "moveDown(this)");
     colDown.appendChild(btnDown);
-
 
     row.appendChild(colUp);
     row.appendChild(colDown);
 
 
-    $(".container").append(row);
+    $(<%= RightPage.ClientID%>).append(row);
 }
 
-function moveUp() {
+
+function moveUp(btn) {
+    alert(btn.id);
     
-}
+        $row = $(btn).parent().parent().clone();
+        $aboveRow = $(btn).parent().parent().prev().clone();
+
+        $(btn).parent().parent().prev().replaceWith($row);
+        $(btn).parent().parent().replaceWith($aboveRow);        
+    }
+function moveDown(btn) {
+    alert(btn.id);
+    
+        $row = $(btn).parent().parent().clone();
+        $belowRow = $(btn).parent().parent().next().clone();
+
+        $(btn).parent().parent().next().replaceWith($row);
+        $(btn).parent().parent().replaceWith($belowRow);       
+    }
 </script>
 </asp:Content>
 
