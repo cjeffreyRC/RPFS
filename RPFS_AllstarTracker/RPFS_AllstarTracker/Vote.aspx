@@ -9,18 +9,18 @@
     </div>
     <p style="width:50%;float:left" ondragover="allowDrop(event)" ondrop="drop(event)">Drop player here to add to list</p>
     <div id="MidPage" class="container" style="width:3%;float:left" runat="server" ondragover="return true">
-        <div class="row"><div class="col-xs-12">12</div></div>
-        <div class="row"><div class="col-xs-12">11</div></div>
-        <div class="row"><div class="col-xs-12">10</div></div>
-        <div class="row"><div class="col-xs-12">9</div></div>
-        <div class="row"><div class="col-xs-12">8</div></div>
-        <div class="row"><div class="col-xs-12">7</div></div>
-        <div class="row"><div class="col-xs-12">6</div></div>
-        <div class="row"><div class="col-xs-12">5</div></div>
-        <div class="row"><div class="col-xs-12">4</div></div>
-        <div class="row"><div class="col-xs-12">3</div></div>
-        <div class="row"><div class="col-xs-12">2</div></div>
-        <div class="row"><div class="col-xs-12">1</div></div>
+        <div style="height:20px"><div class="col-xs-12">12</div></div>
+        <div style="height:20px"><div class="col-xs-12">11</div></div>
+        <div style="height:20px"><div class="col-xs-12">10</div></div>
+        <div style="height:20px"><div class="col-xs-12">9</div></div>
+        <div style="height:20px"><div class="col-xs-12">8</div></div>
+        <div style="height:20px"><div class="col-xs-12">7</div></div>
+        <div style="height:20px"><div class="col-xs-12">6</div></div>
+        <div style="height:20px"><div class="col-xs-12">5</div></div>
+        <div style="height:20px"><div class="col-xs-12">4</div></div>
+        <div style="height:20px"><div class="col-xs-12">3</div></div>
+        <div style="height:20px"><div class="col-xs-12">2</div></div>
+        <div style="height:20px"><div class="col-xs-12">&nbsp 1</div></div>
 
     </div>
     
@@ -54,7 +54,7 @@ function drop(ev) {
     btnUp.setAttribute("id", "btnUp");
     btnUp.setAttribute("name", "btnUp");
     btnUp.setAttribute("value", "Up");
-    btnUp.setAttribute("style", "height:15px");
+    btnUp.setAttribute("style", "height:20px");
     btnUp.setAttribute("onclick","moveUp(this)")
     colUp.appendChild(btnUp);
 
@@ -68,7 +68,7 @@ function drop(ev) {
     btnDown.setAttribute("id", "btnDown");
     btnDown.setAttribute("name", "btnDown");
     btnDown.setAttribute("value", "Down");
-    btnDown.setAttribute("style", "height:15px");
+    btnDown.setAttribute("style", "height:20px");
     btnDown.setAttribute("onclick", "moveDown(this)");
     colDown.appendChild(btnDown);
 
