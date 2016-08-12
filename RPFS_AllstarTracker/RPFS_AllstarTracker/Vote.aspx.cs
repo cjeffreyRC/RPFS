@@ -14,19 +14,19 @@ namespace RPFS_AllstarTracker
         {
             if (!IsPostBack)
             {
-                if (Session["user"] != null)
-                {
-                    User myUser = (User)Session["user"];
+                //if (Session["user"] != null)
+                //{
+                //    User myUser = (User)Session["user"];
 
-                    if (myUser.getUserId() == -1)
-                    {
-                        Response.Redirect("Home.aspx?msg=Must log in to make your vote");
-                    }
-                }
-                else
-                {
-                    Response.Redirect("Home.aspx?msg=Must log in to make your vote");
-                }
+                //    if (myUser.getUserId() == -1)
+                //    {
+                //        Response.Redirect("Home.aspx?msg=Must log in to make your vote");
+                //    }
+                //}
+                //else
+                //{
+                //    Response.Redirect("Home.aspx?msg=Must log in to make your vote");
+                //}
                 HtmlGenericControl table = TableGenerator.CreateTable("spGetPlayers");
                 for (int i = 0; i < table.Controls.Count; i++)
                 {
