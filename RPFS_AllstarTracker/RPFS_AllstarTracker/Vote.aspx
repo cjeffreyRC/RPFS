@@ -4,10 +4,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     VOTE PAGE<br />
 
-    <div id="LeftPage" style="width:49%;float:left" runat="server" ondragover="return true">
+    <div id="LeftPage" style="width:49%;float:left;" runat="server" ondragover="return true">
 
     </div>
-    <p style="width:50%;float:left" ondragover="allowDrop(event)" ondrop="drop(event)">Drop player here to add to list</p>
+    <div style="width:50%;float:left;position:fixed;left:50%;border:thick; border-color:aliceblue">
+        <p style="float:left;width:100%" ondragover="allowDrop(event)" ondrop="drop(event)">Drop player here to add to list</p>
     <div id="MidPage" class="container" style="width:3%;float:left" runat="server" ondragover="return true">
         <div style="height:20px"><div class="col-xs-12">12</div></div>
         <div style="height:20px"><div class="col-xs-12">11</div></div>
@@ -20,13 +21,15 @@
         <div style="height:20px"><div class="col-xs-12">4</div></div>
         <div style="height:20px"><div class="col-xs-12">3</div></div>
         <div style="height:20px"><div class="col-xs-12">2</div></div>
-        <div style="height:20px"><div class="col-xs-12">&nbsp 1</div></div>
+        <div style="height:20px"><div class="col-xs-12">1</div></div>
 
     </div>
     
-    <div id="RightPage" class="container" style="width:47%;float:left" runat="server">
+    <div id="RightPage" class="container" style="width:47%;float:left;" runat="server">
         
     </div>
+    </div>
+    
     <script>
 function allowDrop(ev) {
     ev.preventDefault();
@@ -54,7 +57,7 @@ function drop(ev) {
     btnUp.setAttribute("id", "btnUp");
     btnUp.setAttribute("name", "btnUp");
     btnUp.setAttribute("value", "Up");
-    btnUp.setAttribute("style", "height:20px");
+    btnUp.setAttribute("style", "height:13px; box-sizing: content-box; padding: 0;");
     btnUp.setAttribute("onclick","moveUp(this)")
     colUp.appendChild(btnUp);
 
@@ -68,7 +71,7 @@ function drop(ev) {
     btnDown.setAttribute("id", "btnDown");
     btnDown.setAttribute("name", "btnDown");
     btnDown.setAttribute("value", "Down");
-    btnDown.setAttribute("style", "height:20px");
+    btnDown.setAttribute("style", "height:13px; box-sizing: content-box; padding: 0;");
     btnDown.setAttribute("onclick", "moveDown(this)");
     colDown.appendChild(btnDown);
 
