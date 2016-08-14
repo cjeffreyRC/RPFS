@@ -40,5 +40,19 @@ namespace RPFS_AllstarTracker
             }
         }
 
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            List<List<string>> players = new List<List<string>>();
+            
+            foreach (HtmlControl row in RightPage.Controls)
+            {
+                List<string> values = new List<string>();
+                foreach (HtmlGenericControl col in row.Controls)
+                {
+                    values.Add(col.InnerText);
+                }
+                players.Add(values);
+            }
+        }
     }
 }

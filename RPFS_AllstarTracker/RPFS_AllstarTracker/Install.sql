@@ -18,7 +18,7 @@ teamId INT PRIMARY KEY IDENTITY(0,1),
 teamName VARCHAR(50),
 teamLocation VARCHAR(50)
 )
-INSERT INTO tbTeams (teamLocation, teamName) VALUES ('Chicago','Bulls'),('Memphis','Grizzlies'),('Atlanta','Hawks'),('Miami','Heat'),('Charlotte','Hornets'),('Utah','Jazz'),('Indiana','Pacers'),('Toronto','Raptors'),('Minesota','TimberWolves')
+INSERT INTO tbTeams (teamLocation, teamName) VALUES ('Chicago','Bulls'),('Memphis','Grizzlies'),('Atlanta','Hawks'),('Miami','Heat'),('Charlotte','Hornets'),('Utah','Jazz'),('Indiana','Pacers'),('Toronto','Raptors'),('Houston','Rockets'),('Minesota','TimberWolves')
 
 CREATE TABLE tbUsers
 (
