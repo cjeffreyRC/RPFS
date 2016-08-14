@@ -14,19 +14,19 @@ namespace RPFS_AllstarTracker
         {
             if (!IsPostBack)
             {
-                if (Session["user"] != null)
-                {
-                    User myUser = (User)Session["user"];
+                //if (Session["user"] != null)
+                //{
+                //    User myUser = (User)Session["user"];
 
-                    if (myUser.getUserId() == -1)
-                    {
-                        Response.Redirect("Home.aspx?msg=Must log in to make your vote");
-                    }
-                }
-                else
-                {
-                    Response.Redirect("Home.aspx?msg=Must log in to make your vote");
-                }
+                //    if (myUser.getUserId() == -1)
+                //    {
+                //        Response.Redirect("Home.aspx?msg=Must log in to make your vote");
+                //    }
+                //}
+                //else
+                //{
+                //    Response.Redirect("Home.aspx?msg=Must log in to make your vote");
+                //}
                 HtmlGenericControl table = TableGenerator.CreateTable("spGetPlayers");
                 for (int i = 0; i < table.Controls.Count; i++)
                 {
@@ -34,13 +34,25 @@ namespace RPFS_AllstarTracker
                     div.Attributes.Add("draggable", "true");
                     div.Attributes.Add("ondragstart", "drag(event)");
                     div.ID = table.Controls[i].Controls[0].ToString()+i;
-                    //div.Attributes.Add("ondrop", "return true");
-                    //div.Attributes.Add("ondragover", "return true");
                 }
                 RightPage.Attributes.Add("ondrop", "drop(event)");
                 LeftPage.Controls.Add(table);
             }
         }
 
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            List<List<string>> players = new List<List<string>>();
+            
+            foreach (HtmlControl row in RightPage.Controls)
+            {
+                List<string> values = new List<string>();
+                foreach (HtmlGenericControl col in row.Controls)
+                {
+                    values.Add(col.InnerText);
+                }
+                players.Add(values);
+            }
+        }
     }
 }

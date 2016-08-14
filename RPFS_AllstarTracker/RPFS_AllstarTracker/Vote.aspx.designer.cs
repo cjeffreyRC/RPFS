@@ -22,15 +22,6 @@ namespace RPFS_AllstarTracker {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl LeftPage;
         
         /// <summary>
-        /// MidPage control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl MidPage;
-        
-        /// <summary>
         /// RightPage control.
         /// </summary>
         /// <remarks>
@@ -38,5 +29,14 @@ namespace RPFS_AllstarTracker {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl RightPage;
+        
+        /// <summary>
+        /// btnSubmit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnSubmit;
     }
 }
