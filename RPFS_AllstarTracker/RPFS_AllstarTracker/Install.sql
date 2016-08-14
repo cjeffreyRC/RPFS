@@ -56,7 +56,7 @@ playerOfGameCount INT DEFAULT 0
 --INSERT INTO tbPlayers (playerFirstName, playerLastName, PlayerOverall, playerPosition, playerTeamId) VALUES ('Paul','George',92,2,0),('Chris','Paul',94,0,0),('Hakeem','Olajowan',95,4,0),('Jimmy','Harden',90,1,1),('Marc','Gasol',84,3,2)
 
 BULK INSERT tbPlayers
-FROM 'C:\Users\robjx_000\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
+FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
 WITH
 (
 	FIRSTROW = 2,
