@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using RPFS;
+using System.Web.UI;
 
 namespace RPFS_AllstarTracker
 {
@@ -43,16 +44,31 @@ namespace RPFS_AllstarTracker
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
             List<List<string>> players = new List<List<string>>();
-            
-            foreach (HtmlControl row in RightPage.Controls)
+
+            ControlCollection div = RightPage.Controls;
+            for (int i = 0; i < div.Count; i++)
             {
-                List<string> values = new List<string>();
-                foreach (HtmlGenericControl col in row.Controls)
+                if (div[i] is LiteralControl)
                 {
-                    values.Add(col.InnerText);
+                    foreach (ControlCollection row in (LiteralControl)div[i].Controls)
+                    {
+                        //Trying to figure out what to do around here
+                    }
                 }
-                players.Add(values);
             }
+
+
+            //foreach (HtmlGenericControl row in div)
+            //{
+            //    List<string> values = new List<string>();
+            //    foreach (HtmlGenericControl col in row.Controls)
+            //    {
+            //        values.Add(col.InnerText);
+            //    }
+
+            //    players.Add(values);
+            //}
+
         }
     }
 }

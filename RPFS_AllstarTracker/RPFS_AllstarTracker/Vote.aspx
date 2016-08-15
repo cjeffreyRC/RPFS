@@ -7,13 +7,16 @@
 
     <div id="LeftPage" style="width: 48%; float: left; white-space: nowrap; text-overflow: ellipsis" runat="server" ondragover="return true">
     </div>
-    <div style="width: 50%; float: left; position: fixed; right: 5%; top: 5%; white-space: nowrap; text-overflow: ellipsis;">
+    <div style="width: 50%; float: left; position: fixed; right: 5%; top: 5%; white-space: nowrap; text-overflow: ellipsis;" runat="server">
         <p style="width: 100%" ondragover="allowDrop(event)" ondrop="drop(event)"><b><u>Drop player here to add to list</u></b></p>
 
         <div id="RightPage" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white" runat="server">
         </div><br />
-        <asp:Button ID="btnSubmit" runat="server" Text="Vote!" OnClick="btnSubmit_Click" />
+        <asp:Button ID="btnSubmit" runat="server" Text="Vote!" OnClick="btnSubmit_Click" /><asp:Label ID="lblMsg" runat="server" ></asp:Label>
     </div>
+
+
+
 
     <script>
         function allowDrop(ev) {
@@ -29,6 +32,7 @@
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
             var row = document.getElementById(data);
+            //row.setAttribute("runat", "server");
             var columnToSplit = row.lastChild;
             columnToSplit.removeAttribute("class");
             columnToSplit.setAttribute("class", "col-xs-1");
@@ -117,6 +121,7 @@ function moveDown(btn) {
     $(btn).parent().parent().next().replaceWith($row);
     $(btn).parent().parent().replaceWith($belowRow);       
 }
+
     </script>
 </asp:Content>
 

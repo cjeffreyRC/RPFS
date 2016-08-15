@@ -50,6 +50,7 @@ namespace RPFS
         {
             HtmlGenericControl row = new HtmlGenericControl("div");
             row.Attributes.Add("class", "row");
+            row.Attributes.Add("runat", "server");
             int colCount = dr.Table.Columns.Count;
 
             for (int i = 0; i < colCount; i++)
@@ -65,6 +66,7 @@ namespace RPFS
             col.Attributes.Add("class", "col-xs-3");
             col.Attributes.Add("ondrop", "return true");
             col.Attributes.Add("ondragover", "return true");
+            col.Attributes.Add("runat", "server");
             col.InnerText = colValue.ToString();
             return col;
         }
