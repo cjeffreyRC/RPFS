@@ -28,6 +28,7 @@ namespace RPFS_AllstarTracker
                 //{
                 //    Response.Redirect("Home.aspx?msg=Must log in to make your vote");
                 //}
+
                 HtmlGenericControl table = TableGenerator.CreateTable("spGetPlayers");
                 for (int i = 0; i < table.Controls.Count; i++)
                 {
@@ -43,27 +44,28 @@ namespace RPFS_AllstarTracker
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            
-            Control ctrl = RightPage;
-            if (ctrl is HtmlGenericControl)
-            {
-                List<List<HtmlGenericControl>> Rows = new List<List<HtmlGenericControl>>();
-                lblMsg.Text = "Table is Generic Control";
-                HtmlGenericControl table = (HtmlGenericControl)ctrl;
-                for (int i = 0; i < table.Controls.Count; i++)
-                {
-                    List<HtmlGenericControl> Cols = new List<HtmlGenericControl>();
-                    for (int x = 0; x < table.Controls[i].Controls.Count; x++)
-                    {
-                        Cols.Add((HtmlGenericControl)table.Controls[i].Controls[x]);
-                    }
-                    Rows.Add(Cols);
-                }
-            }
-            else if (ctrl is LiteralControl)
-            {
-                lblMsg.Text = "Table is Literal Control";
-            }
+            string RightPageID = RightPage.UniqueID;
+
+            HtmlGenericControl table = (HtmlGenericControl)FindControl(RightPageID);
+            //if (ctrl is HtmlGenericControl)
+            //{
+            //    List<List<HtmlGenericControl>> Rows = new List<List<HtmlGenericControl>>();
+            //    lblMsg.Text = "Table is Generic Control";
+            //    HtmlGenericControl table = (HtmlGenericControl)ctrl;
+            //    for (int i = 0; i < table.Controls.Count; i++)
+            //    {
+            //        List<HtmlGenericControl> Cols = new List<HtmlGenericControl>();
+            //        for (int x = 0; x < table.Controls[i].Controls.Count; x++)
+            //        {
+            //            Cols.Add((HtmlGenericControl)table.Controls[i].Controls[x]);
+            //        }
+            //        Rows.Add(Cols);
+            //    }
+            //}
+            //else if (ctrl is LiteralControl)
+            //{
+            //    lblMsg.Text = "Table is Literal Control";
+            //}
 
 
             //List<List<string>> players = new List<List<string>>();
@@ -79,6 +81,7 @@ namespace RPFS_AllstarTracker
             //        }
             //    }
             //}
+
 
         }
     }
