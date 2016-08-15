@@ -12,7 +12,7 @@
 
         <div id="RightPage" runat="server" class="container" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white" >
         </div><br />
-        <asp:Button ID="btnSubmit" runat="server" Text="Vote!" OnClick="btnSubmit_Click" CommandArgument="<%# RightPage.ClientID %>" CommandName="RightPage" /><asp:Label ID="lblMsg" runat="server" ></asp:Label>
+        <input id="btnSubmit" type="button" value="Vote!" onserverclick="btnSubmit_Click" runat="server" /><asp:Label ID="lblMsg" runat="server" ></asp:Label>
     </div>
 
 
@@ -119,7 +119,14 @@ function moveDown(btn) {
     $belowRow.contents().last().prev().prev().replaceWith($rowPoints);
 
     $(btn).parent().parent().next().replaceWith($row);
-    $(btn).parent().parent().replaceWith($belowRow);       
+    $(btn).parent().parent().replaceWith($belowRow);
+
+    function doStuff() {
+        if (typeof(Storage) !== "undefined")
+        {
+            localStorage.setItem("table", $(<%# RightPage.ClientID%>).contents());
+        }
+    }
 }
 
     </script>
