@@ -31,6 +31,7 @@ namespace RPFS
         {
             HtmlGenericControl tb = new HtmlGenericControl("div");
             tb.Attributes.Add("class", "container-fluid");
+            tb.Attributes.Add("runat", "server");
             InitDivTable(ds.Tables[0],tb);
             
             return tb;

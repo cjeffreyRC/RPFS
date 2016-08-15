@@ -10,9 +10,9 @@
     <div style="width: 50%; float: left; position: fixed; right: 5%; top: 5%; white-space: nowrap; text-overflow: ellipsis;" runat="server">
         <p style="width: 100%" ondragover="allowDrop(event)" ondrop="drop(event)"><b><u>Drop player here to add to list</u></b></p>
 
-        <div id="RightPage" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white" runat="server">
+        <div id="RightPage" runat="server" class="container" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white" >
         </div><br />
-        <asp:Button ID="btnSubmit" runat="server" Text="Vote!" OnClick="btnSubmit_Click" /><asp:Label ID="lblMsg" runat="server" ></asp:Label>
+        <asp:Button ID="btnSubmit" runat="server" Text="Vote!" OnClick="btnSubmit_Click" CommandArgument="<%# RightPage.ClientID %>" CommandName="RightPage" /><asp:Label ID="lblMsg" runat="server" ></asp:Label>
     </div>
 
 

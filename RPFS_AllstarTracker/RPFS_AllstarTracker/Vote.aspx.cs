@@ -43,30 +43,41 @@ namespace RPFS_AllstarTracker
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            List<List<string>> players = new List<List<string>>();
-
-            ControlCollection div = RightPage.Controls;
-            for (int i = 0; i < div.Count; i++)
+            
+            Control ctrl = RightPage;
+            if (ctrl is HtmlGenericControl)
             {
-                if (div[i] is LiteralControl)
+                List<List<HtmlGenericControl>> Rows = new List<List<HtmlGenericControl>>();
+                lblMsg.Text = "Table is Generic Control";
+                HtmlGenericControl table = (HtmlGenericControl)ctrl;
+                for (int i = 0; i < table.Controls.Count; i++)
                 {
-                    foreach (ControlCollection row in (LiteralControl)div[i].Controls)
+                    List<HtmlGenericControl> Cols = new List<HtmlGenericControl>();
+                    for (int x = 0; x < table.Controls[i].Controls.Count; x++)
                     {
-                        //Trying to figure out what to do around here
+                        Cols.Add((HtmlGenericControl)table.Controls[i].Controls[x]);
                     }
+                    Rows.Add(Cols);
                 }
+            }
+            else if (ctrl is LiteralControl)
+            {
+                lblMsg.Text = "Table is Literal Control";
             }
 
 
-            //foreach (HtmlGenericControl row in div)
-            //{
-            //    List<string> values = new List<string>();
-            //    foreach (HtmlGenericControl col in row.Controls)
-            //    {
-            //        values.Add(col.InnerText);
-            //    }
+            //List<List<string>> players = new List<List<string>>();
 
-            //    players.Add(values);
+            //HtmlGenericControl div = RightPage.Controls;
+            //for (int i = 0; i < div.Count; i++)
+            //{
+            //    if (div[i] is LiteralControl)
+            //    {
+            //        for (int x = 0; x < div[i].Controls.Count; x++)
+            //        {
+            //            lblMsg.Text = lblMsg.Text + (HtmlGenericControl)div[i].Controls[x];
+            //        }
+            //    }
             //}
 
         }
