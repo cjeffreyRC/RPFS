@@ -13,14 +13,15 @@
         <div id="RightPage" runat="server" class="container" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white">
         </div>
         <br />
-        <asp:Button ID="btnSubmit" runat="server" Text="Vote!" OnClick="btnSubmit_Click" /><asp:Label ID="lblMsg" runat="server"></asp:Label>
+        <input id="btnSubmit" type="button" runat="server" value="Vote!" onclick="return submit" /><asp:Label ID="lblMsg" runat="server"></asp:Label>
     </div>
 
 
 
 
-
     <script>
+        $('.btnSubmit').click(submit());
+
         function allowDrop(ev) {
             ev.preventDefault();
         }
@@ -67,7 +68,6 @@
                 //btnUp.setAttribute("style", "height:90%");
                 btnUp.setAttribute("onclick", "moveUp(this)");
                 colUp.appendChild(btnUp);
-
 
                 var colDown = document.createElement("div");
                 colDown.setAttribute("class", "col-xs-1");
@@ -123,10 +123,22 @@
         }
         function submit() {
             var playerArray = [];
-            for (var i = 0; i < $(RightPage).contents().length() ; i++)
+
+            for (var i = 12; i > 0 ; i--)
             {
-                playerArray[i] = RightPage.children[i];
+                playerArray[i] = [];//new Array(2);
+                playerArray[i][0] = $('<%= RightPage.ClientID%>')
+                playerArray[i][1] = i;
             }
+            for (var i = 0; i < playerArray.length; i++) {
+                alert(playerArray[i]);
+            }
+            $.ajax('SubmitVote.ashx', {
+                dataType: "text/javascript",
+                data: { "players":playerArray },
+                success: alert("ajax success"),
+                error: alert("ajax failed")
+            })
         }
 
     </script>
