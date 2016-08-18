@@ -10,17 +10,17 @@
     <div style="width: 50%; float: left; position: fixed; right: 5%; top: 5%; white-space: nowrap; text-overflow: ellipsis;" runat="server">
         <p style="width: 100%" ondragover="allowDrop(event)" ondrop="drop(event)"><b><u>Drop player here to add to list</u></b></p>
 
-        <div id="RightPage" runat="server" class="container" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white">
+        <div id="RightPage" runat="server" name="RightPage" class="container subVal" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white">
         </div>
         <br />
-        <input id="btnSubmit" type="button" runat="server" value="Vote!" onclick="return submit" /><asp:Label ID="lblMsg" runat="server"></asp:Label>
+        <input id="btnSubmit" type="button" value="Vote!" onclick="submitValues()" />
     </div>
 
 
 
 
     <script>
-        $('.btnSubmit').click(submit());
+        
 
         function allowDrop(ev) {
             ev.preventDefault();
@@ -121,26 +121,30 @@
             $(btn).parent().parent().next().replaceWith($row);
             $(btn).parent().parent().replaceWith($belowRow);
         }
-        function submit() {
+        function submitValues() {
             var playerArray = [];
-
+            var x = 0;
+            var temp = $(".subVal").children();
             for (var i = 12; i > 0 ; i--)
             {
-                playerArray[i] = [];//new Array(2);
-                playerArray[i][0] = $('<%= RightPage.ClientID%>')
-                playerArray[i][1] = i;
+                playerArray[x] = [];//new Array(2);
+                playerArray[x][0] = x;
+                playerArray[x][1] = i;
+                x++;
+                temp = temp.next();
             }
-            for (var i = 0; i < playerArray.length; i++) {
-                alert(playerArray[i]);
+            for (var y = 0; y < playerArray.length; y++) {
+                alert(playerArray[y][0] + " | " + playerArray[y][1]);
             }
             $.ajax('SubmitVote.ashx', {
                 dataType: "text/javascript",
-                data: { "players":playerArray },
-                success: alert("ajax success"),
-                error: alert("ajax failed")
+                data: { players:playerArray },
+                success: function (result) { alert(result) },
+                error: function (error) { alert(error) }
             })
         }
 
+        
     </script>
 </asp:Content>
 

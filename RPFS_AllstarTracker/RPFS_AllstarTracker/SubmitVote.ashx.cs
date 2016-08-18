@@ -15,7 +15,7 @@ namespace RPFS_AllstarTracker
         public void ProcessRequest(HttpContext context)
         {
             context.Response.ContentType = "text/javascript";
-            string players = context.Request.QueryString["players"];
+            //string[] players = context.Request.QueryString[;
             context.Response.Write("Hello World");
         }
 
