@@ -63,7 +63,7 @@ vote INT
 
 
 BULK INSERT tbPlayers
-FROM 'C:\Repository\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
+FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
 WITH
 (
 	FIRSTROW = 2,
@@ -84,7 +84,15 @@ CREATE PROCEDURE spVote
 @vote INT
 )
 AS BEGIN
-	INSERT INTO tbPlayerVotes (userId,playerId,vote) VALUES (@userId,@playerId,@vote)
+	IF (12 <= (SELECT COUNT(userId) FROM tbPlayerVotes WHERE userId = @userId))
+	BEGIN
+		SELECT 0
+	END
+	ELSE
+	BEGIN
+		INSERT INTO tbPlayerVotes (userId,playerId,vote) VALUES (@userId,@playerId,@vote)
+		SELECT 1
+	END
 END
 GO
 
@@ -127,7 +135,7 @@ GO
 --</STORED PROCEDURES>--
 --<TESTING>--
 
-
+--SELECT * FROM tbPlayerVotes
 
 --IF EXISTS(SELECT * FROM tbUsers WHERE userEmail = 'Tyler@RPFS.TV' AND userPassword = '123')
 --	BEGIN

@@ -24,12 +24,10 @@ namespace RPFS
 
             if (userId != -1)
             {
-                //isLoggedIn = true;
                 currentUser = new User(userId);
             }
             else
             {
-                //isLoggedIn = false;
                 currentUser = new User();
             }
             return currentUser;
