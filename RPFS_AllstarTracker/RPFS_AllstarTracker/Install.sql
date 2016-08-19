@@ -53,7 +53,14 @@ playerOverall INT,
 playerOriginalTeam VARCHAR(50),
 playerOfGameCount INT DEFAULT 0
 )
---INSERT INTO tbPlayers (playerFirstName, playerLastName, PlayerOverall, playerPosition, playerTeamId) VALUES ('Paul','George',92,2,0),('Chris','Paul',94,0,0),('Hakeem','Olajowan',95,4,0),('Jimmy','Harden',90,1,1),('Marc','Gasol',84,3,2)
+
+CREATE TABLE tbPlayerVotes
+(
+userId INT FOREIGN KEY REFERENCES tbUsers(userId),
+playerId INT FOREIGN KEY REFERENCES tbPlayers(playerId),
+vote INT
+)
+
 
 BULK INSERT tbPlayers
 FROM 'C:\Repository\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
@@ -69,6 +76,17 @@ WITH
 go
 --</DATABASE INSTALLATIONS>--
 --<STORED PROCEDURES>--
+
+CREATE PROCEDURE spVote
+(
+@userId INT,
+@playerId INT,
+@vote INT
+)
+AS BEGIN
+	INSERT INTO tbPlayerVotes (userId,playerId,vote) VALUES (@userId,@playerId,@vote)
+END
+GO
 
 CREATE PROCEDURE spLogin
 (
