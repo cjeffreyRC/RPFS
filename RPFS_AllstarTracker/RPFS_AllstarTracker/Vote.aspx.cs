@@ -35,7 +35,6 @@ namespace RPFS_AllstarTracker
                     HtmlGenericControl div = (HtmlGenericControl)table.Controls[i];
                     div.Attributes.Add("draggable", "true");
                     div.Attributes.Add("ondragstart", "drag(event)");
-                    div.ID = i.ToString();
                 }
                 RightPage.Attributes.Add("ondrop", "drop(event)");
                 LeftPage.Controls.Add(table);

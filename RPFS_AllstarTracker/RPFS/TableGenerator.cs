@@ -18,14 +18,14 @@ namespace RPFS
 
 
             int colCount = ds.Tables[0].Columns.Count;
-            if (colCount <= 4)
-            {
+            //if (colCount <= 4)
+            //{
                 return CreateDivTable(ds);
-            }
-            else
-            {
-                throw new Exception("Column Size in bootstrap table must be equal to or less than 12.");
-            }
+            //}
+            //else
+            //{
+            //    throw new Exception("Column Size in bootstrap table must be equal to or less than 12.");
+            //}
         }
         static private HtmlGenericControl CreateDivTable(DataSet ds)
         {
@@ -40,18 +40,25 @@ namespace RPFS
 
         static public HtmlGenericControl InitDivTable(DataTable dt, HtmlGenericControl tb)
         {
+            int[] rowIdArray = new int[dt.Rows.Count];
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                tb.Controls.Add(CreateDivRow(dt.Rows[i]));
+                rowIdArray[i] = int.Parse(dt.Rows[i][0].ToString());
+            }
+            dt.Columns.RemoveAt(0);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                tb.Controls.Add(CreateDivRow(dt.Rows[i],rowIdArray[i]));
             }
             return tb;
         }
 
-        static private HtmlGenericControl CreateDivRow(DataRow dr)
+        static private HtmlGenericControl CreateDivRow(DataRow dr, int rowId)
         {
             HtmlGenericControl row = new HtmlGenericControl("div");
             row.Attributes.Add("class", "row");
             row.Attributes.Add("runat", "server");
+            row.Attributes.Add("id", rowId.ToString());
             int colCount = dr.Table.Columns.Count;
 
             for (int i = 0; i < colCount; i++)

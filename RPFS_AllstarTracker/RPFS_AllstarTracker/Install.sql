@@ -126,7 +126,7 @@ GO
 
 CREATE PROCEDURE spGetPlayers
 AS BEGIN
-	SELECT playerName, positionName, teamName, playerOfGameCount
+	SELECT playerId, playerName, positionName, teamName, playerOfGameCount
 	FROM tbPlayers INNER JOIN 
 		 tbPositions ON positionId = playerPosition inner join
 		 tbTeams ON teamId = playerTeamId

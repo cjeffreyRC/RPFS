@@ -20,7 +20,7 @@
 
 
     <script>
-        
+        $('#btnSubmit').prop('disabled', true);
 
         function allowDrop(ev) {
             ev.preventDefault();
@@ -88,11 +88,20 @@
 
 
                 $(<%= RightPage.ClientID%>).append(row);
+                if ($(<%= RightPage.ClientID%>).contents().length == 13)
+                {
+                    $('#btnSubmit').prop('disabled', false);
+                }
+                else
+                {
+                    $('#btnSubmit').prop('disabled', true);
+                }
             }
             else
             {
                 //Max number of rows reached
-                alert("Maximum of 12 players already selected.")
+                alert("Maximum of 12 players already selected.");
+                $('#btnSubmit').prop('disabled', false);
             }
         }
 
@@ -121,6 +130,7 @@
             $(btn).parent().parent().next().replaceWith($row);
             $(btn).parent().parent().replaceWith($belowRow);
         }
+
         function submitValues() {
             var playerArray = [];
             var x = 0;
@@ -132,16 +142,11 @@
                 playerArray[x][1] = i;
                 x++;
             }
-            var qStringPlayerArray;
-            for (var y = 0; y < playerArray.length; y++) {
-                alert(playerArray[y][0] + " | " + playerArray[y][1]);
-                qStringPlayerArray = qStringPlayerArray + playerArray[y].join();
-            }
+
             $.ajax('SubmitVote.ashx', {
-                dataType: "text/plain",
                 data: { players:playerArray },
-                success: function (result) { alert(result) },
-                error: function (error) { alert(error) }
+                success: function (response) { alert(response) },
+                error: function (error) { alert(error.responseText) }
             })
         }
 
