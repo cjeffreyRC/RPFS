@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI.HtmlControls;
+using System.Collections.Specialized;
 
 namespace RPFS_AllstarTracker
 {
@@ -14,9 +15,22 @@ namespace RPFS_AllstarTracker
 
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "text/javascript";
-            //string[] players = context.Request.QueryString[;
-            context.Response.Write("Hello World");
+            context.Response.ContentType = "text/plain";
+
+            NameValueCollection NVC = context.Request.QueryString;
+
+
+            
+
+
+
+            for (int i = 0; i < NVC.Count; i++)
+            {
+                string[] newarray = NVC.GetValues(i);
+                string playerId = newarray[0];
+                string playerPoints = newarray[1];
+            }
+            context.Response.Write("");
         }
 
         public bool IsReusable

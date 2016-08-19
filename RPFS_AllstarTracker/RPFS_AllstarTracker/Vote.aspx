@@ -124,20 +124,21 @@
         function submitValues() {
             var playerArray = [];
             var x = 0;
-            var temp = $(".subVal").children();
             for (var i = 12; i > 0 ; i--)
             {
-                playerArray[x] = [];//new Array(2);
-                playerArray[x][0] = x;
+                //alert($(".subVal").contents()[x + 1].id.split("_").pop());
+                playerArray[x] = [];
+                playerArray[x][0] = $(".subVal").contents()[x + 1].id.split("_").pop();
                 playerArray[x][1] = i;
                 x++;
-                temp = temp.next();
             }
+            var qStringPlayerArray;
             for (var y = 0; y < playerArray.length; y++) {
                 alert(playerArray[y][0] + " | " + playerArray[y][1]);
+                qStringPlayerArray = qStringPlayerArray + playerArray[y].join();
             }
             $.ajax('SubmitVote.ashx', {
-                dataType: "text/javascript",
+                dataType: "text/plain",
                 data: { players:playerArray },
                 success: function (result) { alert(result) },
                 error: function (error) { alert(error) }
