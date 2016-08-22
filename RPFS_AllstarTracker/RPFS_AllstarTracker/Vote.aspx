@@ -4,7 +4,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     VOTE PAGE<br />
-
+    Drag players to the drop zone.<br />
+    Use the up/down buttons to sort the position.<br />
+    Must be 12 players selected to submit your vote.<br />
+    <hr style="width:48%" />
     <div id="LeftPage" style="width: 48%; float: left; white-space: nowrap; text-overflow: ellipsis" runat="server" ondragover="return true">
     </div>
     <div style="width: 50%; float: left; position: fixed; right: 5%; top: 5%; white-space: nowrap; text-overflow: ellipsis;" runat="server">
@@ -35,7 +38,6 @@
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
             var row = document.getElementById(data);
-            //row.setAttribute("runat", "server");
             var columnToSplit = row.lastChild;
             columnToSplit.removeAttribute("class");
             columnToSplit.setAttribute("class", "col-xs-1");

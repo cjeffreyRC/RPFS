@@ -10,15 +10,21 @@ go
 
 
 --<DATABASE INSTALATIONS>--
-
+CREATE TABLE tbConferences
+(
+conferenceId INT PRIMARY KEY IDENTITY(0,1),
+conferenceName VARCHAR(20)
+)
+INSERT INTO tbConferences (conferenceName) VALUES ('East'),('West')
 
 CREATE TABLE tbTeams
 (
 teamId INT PRIMARY KEY IDENTITY(0,1),
 teamName VARCHAR(50),
-teamLocation VARCHAR(50)
+teamLocation VARCHAR(50),
+conference INT FOREIGN KEY REFERENCES tbConferences(conferenceId)
 )
-INSERT INTO tbTeams (teamLocation, teamName) VALUES ('Chicago','Bulls'),('Memphis','Grizzlies'),('Atlanta','Hawks'),('Miami','Heat'),('Charlotte','Hornets'),('Utah','Jazz'),('Indiana','Pacers'),('Toronto','Raptors'),('Houston','Rockets'),('Minesota','TimberWolves')
+INSERT INTO tbTeams (teamLocation, teamName) VALUES ('Chicago','Bulls'),('Memphis','Grizzlies'),('Atlanta','Hawks'),('Miami','Heat'),('Charlotte','Hornets'),('Utah','Jazz'),('Indiana','Pacers'),('Toronto','Raptors'),('Houston','Rockets'),('Minesota','TimberWolves'),('Golden State','Warriors')
 
 CREATE TABLE tbUsers
 (
@@ -126,17 +132,19 @@ GO
 
 CREATE PROCEDURE spGetPlayers
 AS BEGIN
-	SELECT playerId, playerName, positionName, teamName, playerOfGameCount
-	FROM tbPlayers INNER JOIN 
-		 tbPositions ON positionId = playerPosition inner join
-		 tbTeams ON teamId = playerTeamId
+	SELECT pl.playerId, playerName, positionName, teamName, sum(pv.vote) as points
+	FROM tbPlayers pl INNER JOIN 
+		 tbPositions po ON positionId = playerPosition inner join
+		 tbTeams t ON teamId = playerTeamId full outer join
+		 tbPlayerVotes pv on  pv.playerId = pl.playerId
+	GROUP BY pl.playerId, pl.playerName, positionName, teamName
 END
 GO
 --</STORED PROCEDURES>--
 --<TESTING>--
 
 --SELECT * FROM tbPlayerVotes
-
+--SELECT * FROM tbPlayers
 --IF EXISTS(SELECT * FROM tbUsers WHERE userEmail = 'Tyler@RPFS.TV' AND userPassword = '123')
 --	BEGIN
 --		SELECT userId FROM tbUsers WHERE userEmail = 'Tyler@RPFS.TV' AND userPassword = '123'
