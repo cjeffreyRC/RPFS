@@ -29,7 +29,25 @@ namespace RPFS_AllstarTracker
                     Response.Redirect("Home.aspx?msg=Must log in to make your vote");
                 }
 
-                HtmlGenericControl table = TableGenerator.CreateTable("spGetPlayers");
+
+
+
+
+                HtmlGenericControl table = TableGenerator.CreateTable("spGetPlayersByConferenceId","conferenceId",0);
+                confId.Value = "0";
+                for (int i = 0; i < table.Controls.Count; i++)
+                {
+                    HtmlGenericControl div = (HtmlGenericControl)table.Controls[i];
+                    div.Attributes.Add("draggable", "true");
+                    div.Attributes.Add("ondragstart", "drag(event)");
+                }
+                RightPage.Attributes.Add("ondrop", "drop(event)");
+                LeftPage.Controls.Add(table);
+            }
+            else
+            {
+                HtmlGenericControl table = TableGenerator.CreateTable("spGetPlayersByConferenceId", "conferenceId", 1);
+                confId.Value = "1";
                 for (int i = 0; i < table.Controls.Count; i++)
                 {
                     HtmlGenericControl div = (HtmlGenericControl)table.Controls[i];
@@ -43,44 +61,6 @@ namespace RPFS_AllstarTracker
 
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            string RightPageID = RightPage.UniqueID;
-
-            HtmlGenericControl table = (HtmlGenericControl)FindControl(RightPageID);
-            //if (ctrl is HtmlGenericControl)
-            //{
-            //    List<List<HtmlGenericControl>> Rows = new List<List<HtmlGenericControl>>();
-            //    lblMsg.Text = "Table is Generic Control";
-            //    HtmlGenericControl table = (HtmlGenericControl)ctrl;
-            //    for (int i = 0; i < table.Controls.Count; i++)
-            //    {
-            //        List<HtmlGenericControl> Cols = new List<HtmlGenericControl>();
-            //        for (int x = 0; x < table.Controls[i].Controls.Count; x++)
-            //        {
-            //            Cols.Add((HtmlGenericControl)table.Controls[i].Controls[x]);
-            //        }
-            //        Rows.Add(Cols);
-            //    }
-            //}
-            //else if (ctrl is LiteralControl)
-            //{
-            //    lblMsg.Text = "Table is Literal Control";
-            //}
-
-
-            //List<List<string>> players = new List<List<string>>();
-
-            //HtmlGenericControl div = RightPage.Controls;
-            //for (int i = 0; i < div.Count; i++)
-            //{
-            //    if (div[i] is LiteralControl)
-            //    {
-            //        for (int x = 0; x < div[i].Controls.Count; x++)
-            //        {
-            //            lblMsg.Text = lblMsg.Text + (HtmlGenericControl)div[i].Controls[x];
-            //        }
-            //    }
-            //}
-
 
         }
     }

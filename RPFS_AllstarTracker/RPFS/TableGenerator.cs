@@ -16,24 +16,25 @@ namespace RPFS
             DAL d = new DAL();
             DataSet ds = d.ExecuteProcedure(storedProc);
 
+            return CreateDivTable(ds);
 
-            int colCount = ds.Tables[0].Columns.Count;
-            //if (colCount <= 4)
-            //{
-                return CreateDivTable(ds);
-            //}
-            //else
-            //{
-            //    throw new Exception("Column Size in bootstrap table must be equal to or less than 12.");
-            //}
+        }
+        static public HtmlGenericControl CreateTable(string storedProc,string param,int paramValue)
+        {
+            DAL d = new DAL();
+            d.AddParam(param, paramValue);
+            DataSet ds = d.ExecuteProcedure(storedProc);
+
+            return CreateDivTable(ds);
+
         }
         static private HtmlGenericControl CreateDivTable(DataSet ds)
         {
             HtmlGenericControl tb = new HtmlGenericControl("div");
             tb.Attributes.Add("class", "container-fluid");
             tb.Attributes.Add("runat", "server");
-            InitDivTable(ds.Tables[0],tb);
-            
+            InitDivTable(ds.Tables[0], tb);
+
             return tb;
         }
 
@@ -48,7 +49,7 @@ namespace RPFS
             dt.Columns.RemoveAt(0);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                tb.Controls.Add(CreateDivRow(dt.Rows[i],rowIdArray[i]));
+                tb.Controls.Add(CreateDivRow(dt.Rows[i], rowIdArray[i]));
             }
             return tb;
         }

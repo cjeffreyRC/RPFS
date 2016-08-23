@@ -22,6 +22,7 @@ namespace RPFS_AllstarTracker
                 context.Response.ContentType = "text/plain";
 
                 NameValueCollection NVC = context.Request.QueryString;
+                string conferenceId = context.Request.QueryString["conf"];
                 DAL d = new DAL();
                 bool allSuccess = true;
                 string result = "";
@@ -29,6 +30,7 @@ namespace RPFS_AllstarTracker
 
                 for (int i = 0; i < NVC.Count; i++)
                 {
+
                     string[] newarray = NVC.GetValues(i);
                     d.AddParam("playerId", newarray[0]);
                     d.AddParam("vote", newarray[1]);
@@ -40,6 +42,8 @@ namespace RPFS_AllstarTracker
                     {
                         allSuccess = false;
                     }
+
+
                 }
                 if (allSuccess)
                 {
@@ -49,7 +53,7 @@ namespace RPFS_AllstarTracker
                 {
                     context.Response.Write(0);
                 }
-                
+
             }
         }
 

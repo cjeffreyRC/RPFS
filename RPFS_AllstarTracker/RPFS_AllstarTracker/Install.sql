@@ -22,9 +22,9 @@ CREATE TABLE tbTeams
 teamId INT PRIMARY KEY IDENTITY(0,1),
 teamName VARCHAR(50),
 teamLocation VARCHAR(50),
-conference INT FOREIGN KEY REFERENCES tbConferences(conferenceId)
+teamConferenceId INT FOREIGN KEY REFERENCES tbConferences(conferenceId)
 )
-INSERT INTO tbTeams (teamLocation, teamName) VALUES ('Chicago','Bulls'),('Memphis','Grizzlies'),('Atlanta','Hawks'),('Miami','Heat'),('Charlotte','Hornets'),('Utah','Jazz'),('Indiana','Pacers'),('Toronto','Raptors'),('Houston','Rockets'),('Minesota','TimberWolves'),('Golden State','Warriors')
+INSERT INTO tbTeams (teamLocation, teamName, teamConferenceId) VALUES ('Chicago','Bulls',0),('Memphis','Grizzlies',1),('Atlanta','Hawks',0),('Miami','Heat',0),('Charlotte','Hornets',0),('Utah','Jazz',1),('Indiana','Pacers',0),('Toronto','Raptors',0),('Houston','Rockets',1),('Minesota','TimberWolves',1),('Golden State','Warriors',1)
 
 CREATE TABLE tbUsers
 (
@@ -35,9 +35,18 @@ userEmail VARCHAR(100),
 userPassword VARCHAR(50),
 userTeamId INT FOREIGN KEY REFERENCES tbTeams(teamId)
 )
-INSERT INTO tbUsers (userFirstName,userLastName,userEmail,userPassword,userTeamId) VALUES ('Chris','Jeffrey','c.jeffrey9999@gmail.com','123',0),
-																						  ('Tyler','Renwick','Tyler@RPFS.TV','123',1),
-																						  ('Garth','Coutu','Garth@RPFS.TV','123',2)
+INSERT INTO tbUsers (userFirstName,userLastName,userEmail,userPassword,userTeamId) VALUES ('Chris','Jeffrey','chris','123',6),
+																						  ('Tyler','Renwick','Tyler','123',8),
+																						  ('Garth','Coutu','Garth','123',1),
+																						  ('Rob','Walluk','RobW','123',3),
+																						  ('Rob','Jeffrey','RobJ','123',9),
+																						  ('Trevor','Phaneuf','Trevor','123',0),
+																						  ('Scott','Baxter','Scott','123',2),
+																						  ('Kevin','Wittig','Kevin','123',5),
+																						  ('Josh','Phillion','Josh','123',4),
+																						  ('Ivan','Gagnon','Ivan','123',7),
+																						  ('Alex','Harms','Alex','123',10)
+
 
 CREATE TABLE tbPositions
 (
@@ -69,7 +78,7 @@ vote INT
 
 
 BULK INSERT tbPlayers
-FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
+FROM 'C:\Users\robjx_000\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
 WITH
 (
 	FIRSTROW = 2,
@@ -90,7 +99,7 @@ CREATE PROCEDURE spVote
 @vote INT
 )
 AS BEGIN
-	IF (12 <= (SELECT COUNT(userId) FROM tbPlayerVotes WHERE userId = @userId))
+	IF (24 <= (SELECT COUNT(userId) FROM tbPlayerVotes WHERE userId = @userId))
 	BEGIN
 		SELECT 0
 	END
@@ -132,12 +141,27 @@ GO
 
 CREATE PROCEDURE spGetPlayers
 AS BEGIN
-	SELECT pl.playerId, playerName, positionName, teamName, sum(pv.vote) as points
+	SELECT pl.playerId, playerName, positionName, teamName, SUM(pv.vote) as points
 	FROM tbPlayers pl INNER JOIN 
 		 tbPositions po ON positionId = playerPosition inner join
 		 tbTeams t ON teamId = playerTeamId full outer join
 		 tbPlayerVotes pv on  pv.playerId = pl.playerId
 	GROUP BY pl.playerId, pl.playerName, positionName, teamName
+END
+GO
+
+CREATE PROCEDURE spGetPlayersByConferenceId
+(
+@conferenceId INT
+)
+AS BEGIN
+	SELECT p.playerId, p.playerName, pos.positionName, t.teamName, SUM(pv.vote) as points
+	FROM tbPlayers p INNER JOIN	
+		 tbTeams t ON playerTeamId = teamId INNER JOIN
+		 tbPositions pos ON positionId = p.playerPosition LEFT OUTER JOIN 
+		 tbPlayerVotes pv ON pv.playerId = P.playerId
+	WHERE teamConferenceId = @conferenceId
+	GROUP BY  p.playerId, p.playerName, pos.positionName, t.teamName
 END
 GO
 --</STORED PROCEDURES>--

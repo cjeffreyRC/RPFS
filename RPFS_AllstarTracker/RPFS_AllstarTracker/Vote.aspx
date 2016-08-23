@@ -6,19 +6,23 @@
     VOTE PAGE<br />
     Drag players to the drop zone.<br />
     Use the up/down buttons to sort the position.<br />
-    Must be 12 players selected to submit your vote.<br />
-    <hr style="width:48%" />
+    Submit by pushing the "Vote!" button<br />
+    Must be 12 players selected to submit your vote.<br /><br />
+    Once you submit the first vote, the page will refresh and load the opposite conference<br />
+    Select 12 more players and submit a second time<br />
+    <b><u>DO NOT CLICK VOTE AFTER THIS POINT, IT WILL NOT COUNT</u></b>
+    <hr />
     <div id="LeftPage" style="width: 48%; float: left; white-space: nowrap; text-overflow: ellipsis" runat="server" ondragover="return true">
     </div>
     <div style="width: 50%; float: left; position: fixed; right: 5%; top: 5%; white-space: nowrap; text-overflow: ellipsis;" runat="server">
         <p style="width: 100%" ondragover="allowDrop(event)" ondrop="drop(event)"><b><u>Drop player here to add to list</u></b></p>
 
-        <div id="RightPage" runat="server" name="RightPage" class="container subVal" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white">
+        <div id="RightPage" runat="server" class="container subVal" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white">
         </div>
         <br />
         <input id="btnSubmit" type="button" value="Vote!" onclick="submitValues()" />
     </div>
-
+    <input type="hidden" id="confId" value="" runat="server" />
 
 
 
@@ -44,20 +48,17 @@
 
             var table = $(<%= RightPage.ClientID%>);
             var val = table.contents().contents().last().prev().prev().text();
-            if (val != "1")
-            {
-                if (val == 0)
-                {
+            if (val != "1") {
+                if (val == 0) {
                     //No rows exist yet
                     columnToSplit.innerText = "12";
                 }
-                else
-                {
+                else {
                     //Decrements previous point value by one and sets new number as new row point value
                     columnToSplit.innerText = (parseInt(val) - 1)
                 }
 
-                var colUp = document.createElement("div");    
+                var colUp = document.createElement("div");
                 colUp.setAttribute("class", "col-xs-1");
                 colUp.setAttribute("ondrop", "return true");
                 colUp.setAttribute("ondragover", "return true");
@@ -90,25 +91,21 @@
 
 
                 $(<%= RightPage.ClientID%>).append(row);
-                if ($(<%= RightPage.ClientID%>).contents().length == 13)
-                {
+                if ($(<%= RightPage.ClientID%>).contents().length == 13) {
                     $('#btnSubmit').prop('disabled', false);
                 }
-                else
-                {
+                else {
                     $('#btnSubmit').prop('disabled', true);
                 }
             }
-            else
-            {
+            else {
                 //Max number of rows reached
                 alert("Maximum of 12 players already selected.");
-                $('#btnSubmit').prop('disabled', false);
             }
         }
 
 
-        function moveUp(btn) { 
+        function moveUp(btn) {
             var $row = $(btn).parent().parent().clone();
             var $aboveRow = $(btn).parent().parent().prev().clone();
             var $rowPoints = $(btn).parent().prev().clone();
@@ -120,7 +117,7 @@
             $(btn).parent().parent().prev().replaceWith($row);
             $(btn).parent().parent().replaceWith($aboveRow);
         }
-        function moveDown(btn) {   
+        function moveDown(btn) {
             var $row = $(btn).parent().parent().clone();
             var $belowRow = $(btn).parent().parent().next().clone();
             var $rowPoints = $(btn).parent().prev().prev().clone();
@@ -135,10 +132,10 @@
 
         function submitValues() {
             var playerArray = [];
+            var confId = $('#<%# confId.ClientID%>').val();
             var x = 0;
-            for (var i = 12; i > 0 ; i--)
-            {
-                //alert($(".subVal").contents()[x + 1].id.split("_").pop());
+            for (var i = 12; i > 0 ; i--) {
+
                 playerArray[x] = [];
                 playerArray[x][0] = $(".subVal").contents()[x + 1].id.split("_").pop();
                 playerArray[x][1] = i;
@@ -146,13 +143,22 @@
             }
 
             $.ajax('SubmitVote.ashx', {
-                data: { players:playerArray },
-                success: function (response) { alert(response) },
-                error: function (error) { alert(error.responseText) }
+                data: {
+                    "conf": confId,
+                    players: playerArray
+                },
+                success: function (response) {
+                    alert(response);
+
+                },
+                error: function (error) {
+                    alert(error.responseText)
+                }
             })
+            document.forms[0].submit();
         }
 
-        
+
     </script>
 </asp:Content>
 
