@@ -31,10 +31,10 @@ namespace RPFS
             DataRow dr = d.ExecuteProcedure("spGetUser").Tables[0].Rows[0];
 
             this.userId = userId;
-            userEmail = dr[1].ToString();
-            userFirstName = dr[2].ToString();
-            userLastName = dr[3].ToString();
-            userTeamId = Convert.ToInt32(dr[4]);
+            userEmail = dr[3].ToString();
+            userFirstName = dr[1].ToString();
+            userLastName = dr[2].ToString();
+            userTeamId = Convert.ToInt32(dr[5]);
         }
 
         public int getUserId()
@@ -52,6 +52,12 @@ namespace RPFS
         public int getUserTeamId()
         {
             return this.userTeamId;
+        }
+        public string getUserTeamName()
+        {
+            DAL d = new DAL();
+            d.AddParam("teamId", this.userTeamId);
+            return d.ExecuteScalar("spGetTeamName");
         }
     }
 }

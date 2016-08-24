@@ -164,6 +164,18 @@ AS BEGIN
 	GROUP BY  p.playerId, p.playerName, pos.positionName, t.teamName
 END
 GO
+
+
+CREATE PROCEDURE spGetTeamName
+(
+@teamId INT
+)
+AS BEGIN
+	SELECT teamName 
+	FROM tbTeams
+	WHERE teamId = @teamId
+END
+GO
 --</STORED PROCEDURES>--
 --<TESTING>--
 

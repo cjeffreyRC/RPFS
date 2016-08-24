@@ -8,19 +8,20 @@
     Use the up/down buttons to sort the position.<br />
     Submit by pushing the "Vote!" button<br />
     Must be 12 players selected to submit your vote.<br /><br />
-    Once you submit the first vote, the page will refresh and load the opposite conference<br />
+    Once you submit the first vote(East Conference), the page will refresh and load the West conference<br />
     Select 12 more players and submit a second time<br />
     <b><u>DO NOT CLICK VOTE AFTER THIS POINT, IT WILL NOT COUNT</u></b>
     <hr />
     <div id="LeftPage" style="width: 48%; float: left; white-space: nowrap; text-overflow: ellipsis" runat="server" ondragover="return true">
     </div>
     <div style="width: 50%; float: left; position: fixed; right: 5%; top: 5%; white-space: nowrap; text-overflow: ellipsis;" runat="server">
-        <p style="width: 100%" ondragover="allowDrop(event)" ondrop="drop(event)"><b><u>Drop player here to add to list</u></b></p>
+        <img src="Pics/NBA2K16_Logo.png" style="width:200px;" /><img src="Pics/RPFS2.jpeg" style="width:200px;" />
+        <p style="font-size:3vw;width:100%;height:300px;border:dotted;border-color:darksalmon" ondragover="allowDrop(event)" ondrop="drop(event)"><b><u>Drop player here to add to list</u></b></p>
 
         <div id="RightPage" runat="server" class="container subVal" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white">
         </div>
         <br />
-        <input id="btnSubmit" type="button" value="Vote!" onclick="submitValues()" />
+        <input id="btnSubmit" type="button" value="Vote!" style="float:right;height:100px;width:90%;font-size:2.5vw;" onclick="submitValues()" />
     </div>
     <input type="hidden" id="confId" value="" runat="server" />
 
@@ -45,6 +46,7 @@
             var columnToSplit = row.lastChild;
             columnToSplit.removeAttribute("class");
             columnToSplit.setAttribute("class", "col-xs-1");
+            columnToSplit.setAttribute("style", "color:blue;font-weight: bold;font-size:larger;background-color:green;");
 
             var table = $(<%= RightPage.ClientID%>);
             var val = table.contents().contents().last().prev().prev().text();
@@ -67,7 +69,7 @@
                 btnUp.setAttribute("id", "btnUp");
                 btnUp.setAttribute("name", "btnUp");
                 btnUp.setAttribute("value", "Up");
-                btnUp.setAttribute("style", "height:20px; box-sizing: content-box; padding: 0;");
+                btnUp.setAttribute("style", "height:20px; box-sizing: content-box; padding: 0;color:black");
                 //btnUp.setAttribute("style", "height:90%");
                 btnUp.setAttribute("onclick", "moveUp(this)");
                 colUp.appendChild(btnUp);
@@ -81,7 +83,7 @@
                 btnDown.setAttribute("id", "btnDown");
                 btnDown.setAttribute("name", "btnDown");
                 btnDown.setAttribute("value", "Down");
-                btnDown.setAttribute("style", "height:20px; box-sizing: content-box; padding: 0;");
+                btnDown.setAttribute("style", "height:20px; box-sizing: content-box; padding: 0;color:black");
                 //btnDown.setAttribute("style", "height:90%");
                 btnDown.setAttribute("onclick", "moveDown(this)");
                 colDown.appendChild(btnDown);
@@ -142,20 +144,17 @@
                 x++;
             }
 
-            $.ajax('SubmitVote.ashx', {
+            $.ajax('/SubmitVote.ashx', {
                 data: {
                     "conf": confId,
                     players: playerArray
                 },
                 success: function (response) {
                     alert(response);
-
+                    document.forms[0].submit();
                 },
-                error: function (error) {
-                    alert(error.responseText)
-                }
             })
-            document.forms[0].submit();
+            
         }
 
 

@@ -9,7 +9,7 @@
                 Email:&nbsp
             </td>
             <td>
-                <asp:TextBox id="txtEmail" runat="server"></asp:TextBox>
+                <asp:TextBox id="txtEmail" runat="server" ForeColor="Black"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -17,7 +17,7 @@
                 Password:&nbsp
             </td>
             <td>
-                <asp:TextBox ID="txtPassword" TextMode="Password" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" ForeColor="Black"></asp:TextBox>
             </td>
         </tr>
         <tr>

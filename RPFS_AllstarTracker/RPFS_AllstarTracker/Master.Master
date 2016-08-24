@@ -8,12 +8,17 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body style='background-image:url("pics/Hoop.jpg");background-size:cover; background-attachment:fixed; color:white'>
     <script src="Scripts/jquery-1.9.1.min.js"></script>
     <script src="Scripts/bootstrap.min.js"></script>
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <form id="form1" runat="server">
+    <form id="form1" runat="server" >
     <div ondrop="allowDrop(event)">
+        <asp:LinkButton ID="lbHome" runat="server" Text="Home" PostBackUrl="~/Home.aspx"></asp:LinkButton>&nbsp
+        <asp:LinkButton ID="lbVote" runat="server" Text="Vote" PostBackUrl="~/Vote.aspx"></asp:LinkButton>&nbsp
+        <asp:LinkButton ID="lbResults" runat="server" Text="Results" PostBackUrl="~/Results.aspx"></asp:LinkButton>&nbsp|&nbsp
+        <asp:Label ID="lblUserName" runat="server" ></asp:Label>&nbsp
+        <asp:LinkButton ID="lbLogout" runat="server" Text="Log Out" OnClick="lbLogout_Click"></asp:LinkButton>
         <h1>RPFS Allstar Tracker</h1>
         <asp:Label ID="lblIntro" runat="server" Text="View the current player votes or log in to vote."></asp:Label><br />
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
