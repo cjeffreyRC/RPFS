@@ -15,7 +15,7 @@ CREATE TABLE tbConferences
 conferenceId INT PRIMARY KEY IDENTITY(0,1),
 conferenceName VARCHAR(20)
 )
-INSERT INTO tbConferences (conferenceName) VALUES ('East'),('West')
+INSERT INTO tbConferences (conferenceName) VALUES ('East'),('West'),('Free Agency')
 
 CREATE TABLE tbTeams
 (
@@ -24,7 +24,7 @@ teamName VARCHAR(50),
 teamLocation VARCHAR(50),
 teamConferenceId INT FOREIGN KEY REFERENCES tbConferences(conferenceId)
 )
-INSERT INTO tbTeams (teamLocation, teamName, teamConferenceId) VALUES ('Chicago','Bulls',0),('Memphis','Grizzlies',1),('Atlanta','Hawks',0),('Miami','Heat',0),('Charlotte','Hornets',0),('Utah','Jazz',1),('Indiana','Pacers',0),('Toronto','Raptors',0),('Houston','Rockets',1),('Minesota','TimberWolves',1),('Golden State','Warriors',1)
+INSERT INTO tbTeams (teamLocation, teamName, teamConferenceId) VALUES ('Chicago','Bulls',0),('Memphis','Grizzlies',1),('Atlanta','Hawks',0),('Miami','Heat',0),('Charlotte','Hornets',0),('Utah','Jazz',1),('Indiana','Pacers',0),('Toronto','Raptors',0),('Houston','Rockets',1),('Minesota','TimberWolves',1),('Golden State','Warriors',1),('Extra','Voter',2)
 
 CREATE TABLE tbUsers
 (
@@ -46,6 +46,9 @@ INSERT INTO tbUsers (userFirstName,userLastName,userEmail,userPassword,userTeamI
 																						  ('Josh','Phillion','Josh','123',4),
 																						  ('Ivan','Gagnon','Ivan','123',7),
 																						  ('Alex','Harms','Alex','123',10)
+																						  INSERT INTO tbUsers (userFirstName,userLastName,userEmail,userPassword,userTeamId) VALUES ('Todd','Jeffrey','Todd','1234',11)
+																						  INSERT INTO tbUsers (userFirstName,userLastName,userEmail,userPassword,userTeamId) VALUES ('Alex','Devries','AlexD','1234',11)
+																						  INSERT INTO tbUsers (userFirstName,userLastName,userEmail,userPassword,userTeamId) VALUES ('Adam','Milles','Adam','1234',11)
 
 
 CREATE TABLE tbPositions
@@ -76,6 +79,13 @@ playerId INT FOREIGN KEY REFERENCES tbPlayers(playerId),
 vote INT
 )
 
+CREATE TABLE tbLoginAttempts
+(
+username varchar(500),
+password varchar(500),
+ip varchar(18),
+dayAndTime DATETIME 
+)
 
 BULK INSERT tbPlayers
 FROM 'C:\Users\robjx_000\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
@@ -110,13 +120,14 @@ AS BEGIN
 	END
 END
 GO
-
 CREATE PROCEDURE spLogin
 (
 @userEmail VARCHAR(100),
-@userPassword VARCHAR(50)
+@userPassword VARCHAR(50),
+@ip VARCHAR(18)
 )
 AS BEGIN
+	INSERT INTO tbLoginAttempts (username,password,ip,dayAndTime) VALUES (@userEmail, @userPassword,@ip,GETDATE())
 	IF EXISTS(SELECT * FROM tbUsers WHERE userEmail = @userEmail AND userPassword = @userPassword)
 	BEGIN
 		SELECT userId FROM tbUsers WHERE userEmail = @userEmail AND userPassword = @userPassword
@@ -146,6 +157,7 @@ AS BEGIN
 		 tbPositions po ON positionId = playerPosition inner join
 		 tbTeams t ON teamId = playerTeamId full outer join
 		 tbPlayerVotes pv on  pv.playerId = pl.playerId
+	WHERE teamConferenceId != 2
 	GROUP BY pl.playerId, pl.playerName, positionName, teamName
 END
 GO
@@ -178,7 +190,7 @@ END
 GO
 --</STORED PROCEDURES>--
 --<TESTING>--
-
+--select * from tbLoginAttempts
 --SELECT * FROM tbPlayerVotes
 --SELECT * FROM tbPlayers
 --IF EXISTS(SELECT * FROM tbUsers WHERE userEmail = 'Tyler@RPFS.TV' AND userPassword = '123')

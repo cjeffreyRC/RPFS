@@ -24,7 +24,8 @@ namespace RPFS_AllstarTracker
 
         protected void btnLogin_Click(object sender, EventArgs e)
         {
-            User newUser = Security.Login(txtEmail.Text, txtPassword.Text);
+            string ip = Request.UserHostName;
+            User newUser = Security.Login(txtEmail.Text, txtPassword.Text,ip);
             if (newUser.getUserId() == -1)
             {
                 lblError.Text = "Login information invalid. Please try again.";

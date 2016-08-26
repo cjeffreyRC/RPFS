@@ -14,9 +14,10 @@ namespace RPFS
 
 
 
-        static public User Login(string userEmail, string userPassword)
+        static public User Login(string userEmail, string userPassword,string ip)
         {
             DAL d = new DAL();
+            d.AddParam("ip", ip);
             d.AddParam("userEmail", userEmail);
             d.AddParam("userPassword", userPassword);
             int userId = int.Parse(d.ExecuteScalar("spLogin"));

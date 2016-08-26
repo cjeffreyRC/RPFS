@@ -10,6 +10,8 @@
     Must be 12 players selected to submit your vote.<br /><br />
     Once you submit the first vote(East Conference), the page will refresh and load the West conference<br />
     Select 12 more players and submit a second time<br />
+    Refresh the page to clear selection and start conference over<br />
+    *Note: When you refresh you will still be on the same conference, it does not start from the beggining<br />
     <b><u>DO NOT CLICK VOTE AFTER THIS POINT, IT WILL NOT COUNT</u></b>
     <hr />
     <div id="LeftPage" style="width: 48%; float: left; white-space: nowrap; text-overflow: ellipsis" runat="server" ondragover="return true">
