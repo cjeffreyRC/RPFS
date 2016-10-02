@@ -17,13 +17,13 @@
                 Password:&nbsp
             </td>
             <td>
-                <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" ForeColor="Black"></asp:TextBox>
+                <asp:TextBox ID="txtPassword" TextMode="Password" runat="server" ></asp:TextBox>
             </td>
         </tr>
         <tr>
             <td></td>
             <td>
-                <asp:Button ID="btnLogin" runat="server" Text="Log In" OnClick="btnLogin_Click" />
+                <asp:Button ID="btnLogin" runat="server" Text="Log In" ForeColor="Black" OnClick="btnLogin_Click" />
             </td>
         </tr>
     </table>

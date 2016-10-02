@@ -33,7 +33,7 @@ namespace RPFS_AllstarTracker
             else
             {
                 Session["user"] = newUser;
-                Response.Redirect("Vote.aspx");
+                Response.Redirect("MvpVote.aspx");
             }
             
         }

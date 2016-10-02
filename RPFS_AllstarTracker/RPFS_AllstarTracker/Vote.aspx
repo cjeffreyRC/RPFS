@@ -152,7 +152,7 @@
                     players: playerArray
                 },
                 success: function (response) {
-                    alert(response);
+                    alert("Vote Successful!");
                     document.forms[0].submit();
                 },
             })

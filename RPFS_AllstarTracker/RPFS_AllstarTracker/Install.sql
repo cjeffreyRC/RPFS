@@ -1,4 +1,5 @@
-﻿use master
+﻿
+use master
 go
 drop database RPFS_2K16Allstar
 go
@@ -95,12 +96,51 @@ WITH
     FIELDTERMINATOR = ',',  --CSV field delimiter
     ROWTERMINATOR = '\n'   --Use to shift the control to next row
 )
+CREATE TABLE tbMvpNominations
+(
+playerId INT FOREIGN KEY REFERENCES tbPlayers(playerId),
+)
+INSERT INTO tbMvpNominations (playerId) VALUES (45),(60),(155),(15),(134),(76),(118),(31),(89),(107)
 
+CREATE TABLE tbMvpVotes
+(
+userId INT FOREIGN KEY REFERENCES tbUsers(userId),
+playerId INT FOREIGN KEY REFERENCES tbPlayers(playerId),
+vote INT
+)
 
 
 go
 --</DATABASE INSTALLATIONS>--
 --<STORED PROCEDURES>--
+
+CREATE PROCEDURE spVoteMvp
+(
+@userId INT,
+@playerId INT,
+@vote INT
+)
+AS BEGIN
+	IF (3 <= (SELECT COUNT(userId) FROM tbMvpVotes WHERE userId = @userId))
+	BEGIN
+		SELECT 0
+	END
+	ELSE
+	BEGIN
+		INSERT INTO tbMvpVotes (userId,playerId,vote) VALUES (@userId,@playerId,@vote)
+		SELECT 1
+	END
+END
+GO
+
+CREATE PROCEDURE spGetMvpNominations
+AS BEGIN
+	select playerName, tbTeams.teamLocation + ' ' +tbTeams.teamName as teamName, playerDraftPick
+	from tbMvpNominations left outer join
+		 tbPlayers ON tbPlayers.playerId = tbMvpNominations.playerId JOIN
+		 tbTeams on tbPlayers.playerTeamId = tbTeams.teamId
+END
+GO
 
 CREATE PROCEDURE spVote
 (
@@ -190,8 +230,14 @@ END
 GO
 --</STORED PROCEDURES>--
 --<TESTING>--
+select * from tbPlayerVotes
+select * from tbUsers
+select tbPlayers.playerName from tbPlayers FULL OUTER JOIN tbPlayerVotes on tbPlayerVotes.playerId = tbPlayers.playerId WHERE userId = 11
+select * from tbPlayerVotes WHERE userId = 11
 --select * from tbLoginAttempts
---SELECT * FROM tbPlayerVotes
+--select * from tbPlayerVotes WHERE userId = 11
+select * from tbPlayers
+--SELECT userFIrstName+' '+userLastName AS NAME FROM tbPlayerVotes FULL OUTER JOIN tbUsers ON tbUsers.userId = tbPlayerVotes.userId  GROUP BY userFirstName, userLastName HAVING (COUNT(userFirstName) < 24)
 --SELECT * FROM tbPlayers
 --IF EXISTS(SELECT * FROM tbUsers WHERE userEmail = 'Tyler@RPFS.TV' AND userPassword = '123')
 --	BEGIN
@@ -202,6 +248,17 @@ GO
 --		SELECT '-1'
 --	END
 
---select * from tbPlayers
+--select * from tbPlayers where playerName = 'Chauncey Billups'
 --exec spGetPlayers
 --</TESTING>--
+
+
+-----------QUERY TO DO TRADES EASILY-----------------------------QUERY TO DO TRADES EASILY-------------------------------------------QUERY TO DO TRADES EASILY--------------------------------------QUERY TO DO TRADES EASILY--------------------------------
+--SELECT playerId,playerName,teamName, teamId FROM tbPlayers join 
+--			  tbTeams on tbTeams.teamId = tbPlayers.playerTeamId
+-- WHERE playerName = 'Klay Thompson' or 
+--	   playerName = 'Kevin Garnett'
+
+--UPDATE tbPlayers set
+--			playerTeamId = 5
+--where playerId = 134
