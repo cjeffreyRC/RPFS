@@ -229,14 +229,15 @@ AS BEGIN
 END
 GO
 --</STORED PROCEDURES>--
---<TESTING>--
-select * from tbPlayerVotes
-select * from tbUsers
-select tbPlayers.playerName from tbPlayers FULL OUTER JOIN tbPlayerVotes on tbPlayerVotes.playerId = tbPlayers.playerId WHERE userId = 11
-select * from tbPlayerVotes WHERE userId = 11
---select * from tbLoginAttempts
+-----------------<TESTING>--------------------
+
+--select * from tbPlayerVotes
+--select * from tbUsers
+--select tbPlayers.playerName from tbPlayers FULL OUTER JOIN tbPlayerVotes on tbPlayerVotes.playerId = tbPlayers.playerId WHERE userId = 11
 --select * from tbPlayerVotes WHERE userId = 11
-select * from tbPlayers
+----select * from tbLoginAttempts
+----select * from tbPlayerVotes WHERE userId = 11
+--select * from tbPlayers
 --SELECT userFIrstName+' '+userLastName AS NAME FROM tbPlayerVotes FULL OUTER JOIN tbUsers ON tbUsers.userId = tbPlayerVotes.userId  GROUP BY userFirstName, userLastName HAVING (COUNT(userFirstName) < 24)
 --SELECT * FROM tbPlayers
 --IF EXISTS(SELECT * FROM tbUsers WHERE userEmail = 'Tyler@RPFS.TV' AND userPassword = '123')
