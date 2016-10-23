@@ -108,6 +108,72 @@
             }
         }
 
+        function dropMVP() {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            var row = document.getElementById(data);
+            //var columnToSplit = row.lastChild;
+            //columnToSplit.removeAttribute("class");
+            //columnToSplit.setAttribute("class", "col-xs-1");
+            //columnToSplit.setAttribute("style", "color:blue;font-weight: bold;font-size:larger;background-color:green;");
+
+            var table = $(<%= RightPage.ClientID%>);
+            var val = table.contents().contents().last().prev().prev().text();
+            if (val != "1") {
+                //if (val == 0) {
+                //    //No rows exist yet
+                //    columnToSplit.innerText = "12";
+                //}
+                //else {
+                //    //Decrements previous point value by one and sets new number as new row point value
+                //    columnToSplit.innerText = (parseInt(val) - 1)
+                //}
+
+                var colUp = document.createElement("div");
+                colUp.setAttribute("class", "col-xs-1");
+                colUp.setAttribute("ondrop", "return true");
+                colUp.setAttribute("ondragover", "return true");
+                var btnUp = document.createElement("input");
+                btnUp.setAttribute("type", "button");
+                btnUp.setAttribute("id", "btnUp");
+                btnUp.setAttribute("name", "btnUp");
+                btnUp.setAttribute("value", "Up");
+                btnUp.setAttribute("style", "height:20px; box-sizing: content-box; padding: 0;color:black");
+                //btnUp.setAttribute("style", "height:90%");
+                btnUp.setAttribute("onclick", "moveUp(this)");
+                colUp.appendChild(btnUp);
+
+                var colDown = document.createElement("div");
+                colDown.setAttribute("class", "col-xs-1");
+                colDown.setAttribute("ondrop", "return true");
+                colDown.setAttribute("ondragover", "return true");
+                var btnDown = document.createElement("input");
+                btnDown.setAttribute("type", "button");
+                btnDown.setAttribute("id", "btnDown");
+                btnDown.setAttribute("name", "btnDown");
+                btnDown.setAttribute("value", "Down");
+                btnDown.setAttribute("style", "height:20px; box-sizing: content-box; padding: 0;color:black");
+                //btnDown.setAttribute("style", "height:90%");
+                btnDown.setAttribute("onclick", "moveDown(this)");
+                colDown.appendChild(btnDown);
+
+                row.appendChild(colUp);
+                row.appendChild(colDown);
+
+
+                $(<%= RightPage.ClientID%>).append(row);
+                if ($(<%= RightPage.ClientID%>).contents().length == 13) {
+                    $('#btnSubmit').prop('disabled', false);
+                }
+                else {
+                    $('#btnSubmit').prop('disabled', true);
+                }
+            }
+            else {
+                //Max number of rows reached
+                alert("Maximum of 12 players already selected.");
+            }
+        }
 
         function moveUp(btn) {
             var $row = $(btn).parent().parent().clone();
