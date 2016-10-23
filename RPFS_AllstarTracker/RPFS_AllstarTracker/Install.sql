@@ -63,7 +63,7 @@ INSERT INTO tbPositions (positionId, positionName) VALUES (0,'Point Gaurd'),(1,'
 --Player Id,Pick #,Team Id,Player Name,Position,Overall,Original Team
 CREATE TABLE tbPlayers
 (
-playerId INT PRIMARY KEY IDENTITY(0,1),
+playerId INT PRIMARY KEY,
 playerDraftPick INT,
 playerTeamId INT FOREIGN KEY REFERENCES tbTeams(teamId),
 playerName VARCHAR(50),
@@ -71,6 +71,14 @@ playerPosition INT FOREIGN KEY REFERENCES tbPositions(positionId),
 playerOverall INT,
 playerOriginalTeam VARCHAR(50),
 playerOfGameCount INT DEFAULT 0
+)
+BULK INSERT tbPlayers
+FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
+WITH
+(
+	FIRSTROW = 1,
+    FIELDTERMINATOR = ',',  --CSV field delimiter
+    ROWTERMINATOR = '\n'   --Use to shift the control to next row
 )
 
 CREATE TABLE tbPlayerVotes
@@ -88,14 +96,7 @@ ip varchar(18),
 dayAndTime DATETIME 
 )
 
-BULK INSERT tbPlayers
-FROM 'C:\Users\robjx_000\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
-WITH
-(
-	FIRSTROW = 2,
-    FIELDTERMINATOR = ',',  --CSV field delimiter
-    ROWTERMINATOR = '\n'   --Use to shift the control to next row
-)
+
 CREATE TABLE tbMvpNominations
 (
 playerId INT FOREIGN KEY REFERENCES tbPlayers(playerId),
