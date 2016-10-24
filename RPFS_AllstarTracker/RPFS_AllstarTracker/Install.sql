@@ -73,7 +73,7 @@ playerOriginalTeam VARCHAR(50),
 playerOfGameCount INT DEFAULT 0
 )
 BULK INSERT tbPlayers
-FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
+FROM 'C:\Users\robjx_000\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\Imports\NBA2K16Teams.csv'
 WITH
 (
 	FIRSTROW = 0,

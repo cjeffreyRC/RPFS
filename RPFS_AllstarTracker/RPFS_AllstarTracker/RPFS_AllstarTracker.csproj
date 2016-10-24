@@ -84,7 +84,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="NBA2K16Teams.csv" />
+    <Content Include="Imports\NBA2K16Teams.csv" />
+    <Content Include="Imports\RPFS_NBA 16_MVP_NOM.csv" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Pics\BasketballFloor.jpg" />
