@@ -18,11 +18,12 @@ namespace DataAccessLayer
         /// <param name="connString">A string parameter to indicate the database to connect to.</param>
         public DAL()
         {
-            //---------------CONNECTION STRINGS-------------------
+            //---------------CONNECTION STRINGS DATA SOURCES-------------------
             //TODDS-LAPTOP\\SQLEXPRESS
             //ROBS-PC\\SQLEXPRESS
+            //localhost
 
-            ConnString = "Data Source=CJ-LAPTOP;Initial Catalog=RPFS_2K16Allstar;Integrated Security=SSPI"; // Set the internal variable ConnString to the value of the user chosen value connString
+            ConnString = "Data Source=localhost;Initial Catalog=RPFS_2K16Allstar;Integrated Security=SSPI"; // Set the internal variable ConnString to the value of the user chosen value connString
             _parameters = new List<SqlParameter>(); // initialize our list of parameters to 0
         }
 

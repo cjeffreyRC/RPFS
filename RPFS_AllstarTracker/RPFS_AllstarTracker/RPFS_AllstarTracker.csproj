@@ -72,6 +72,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="MvpResults.aspx" />
     <Content Include="MvpVote.aspx" />
     <Content Include="packages.config" />
     <Content Include="Master.Master" />
@@ -97,6 +98,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery-1.9.1.min.map" />
     <Content Include="SubmitVote.ashx" />
+    <Content Include="SubmitMvpVote.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -125,6 +127,13 @@
     <Compile Include="Master.Master.designer.cs">
       <DependentUpon>Master.Master</DependentUpon>
     </Compile>
+    <Compile Include="MvpResults.aspx.cs">
+      <DependentUpon>MvpResults.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MvpResults.aspx.designer.cs">
+      <DependentUpon>MvpResults.aspx</DependentUpon>
+    </Compile>
     <Compile Include="MvpVote.aspx.cs">
       <DependentUpon>MvpVote.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -139,6 +148,9 @@
     </Compile>
     <Compile Include="Results.aspx.designer.cs">
       <DependentUpon>Results.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SubmitMvpVote.ashx.cs">
+      <DependentUpon>SubmitMvpVote.ashx</DependentUpon>
     </Compile>
     <Compile Include="SubmitVote.ashx.cs">
       <DependentUpon>SubmitVote.ashx</DependentUpon>

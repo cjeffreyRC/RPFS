@@ -76,8 +76,8 @@ BULK INSERT tbPlayers
 FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\RPFS_AllstarTracker\RPFS_AllstarTracker\NBA2K16Teams.csv'
 WITH
 (
-	FIRSTROW = 1,
-    FIELDTERMINATOR = ',',  --CSV field delimiter
+	FIRSTROW = 0,
+    FIELDTERMINATOR = ';',  --CSV field delimiter
     ROWTERMINATOR = '\n'   --Use to shift the control to next row
 )
 
@@ -133,13 +133,22 @@ AS BEGIN
 	END
 END
 GO
-
+--DROP PROCEDURE spGetMvpNominations
 CREATE PROCEDURE spGetMvpNominations
 AS BEGIN
-	select playerName, tbTeams.teamLocation + ' ' +tbTeams.teamName as teamName, playerDraftPick
+	select tbPlayers.playerId, playerName, tbTeams.teamLocation + ' ' +tbTeams.teamName as teamName, playerDraftPick
 	from tbMvpNominations left outer join
 		 tbPlayers ON tbPlayers.playerId = tbMvpNominations.playerId JOIN
 		 tbTeams on tbPlayers.playerTeamId = tbTeams.teamId
+END
+GO
+
+CREATE PROCEDURE spGetMvpVotes
+AS BEGIN
+	SELECT playerName, playerDraftPick, tbPlayers.playerOfGameCount, sum(vote) as points
+	FROM tbMvpVotes INNER JOIN 
+		 tbPlayers ON tbMvpVotes.playerId = tbPlayers.playerId
+	GROUP BY playerName, playerDraftPick, tbPlayers.playerOfGameCount
 END
 GO
 
@@ -231,7 +240,7 @@ END
 GO
 --</STORED PROCEDURES>--
 -----------------<TESTING>--------------------
-
+--select * from tbMvpVotes
 --select * from tbPlayerVotes
 --select * from tbUsers
 --select tbPlayers.playerName from tbPlayers FULL OUTER JOIN tbPlayerVotes on tbPlayerVotes.playerId = tbPlayers.playerId WHERE userId = 11
@@ -250,7 +259,9 @@ GO
 --		SELECT '-1'
 --	END
 
---select * from tbPlayers where playerName = 'Chauncey Billups'
+--SELECT playerName, COUNT(playerName) FROM tbPlayers GROUP BY playerName HAVING COUNT(playerName)>1
+
+--select * from tbPlayers where count(playerName) > 1
 --exec spGetPlayers
 --</TESTING>--
 
