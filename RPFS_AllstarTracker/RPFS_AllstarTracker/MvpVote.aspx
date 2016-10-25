@@ -8,7 +8,14 @@
     <div style="width: 50%; float: left; position: fixed; right: 5%; top: 5%; white-space: nowrap; text-overflow: ellipsis;" runat="server">
         <img src="Pics/NBA2K16_Logo.png" style="width: 200px;" /><img src="Pics/RPFS2.jpeg" style="width: 200px;" />
         <p style="font-size: 3vw; width: 100%; height: 300px; border: dotted; border-color: darksalmon" ondragover="allowDrop(event)" ondrop="drop(event)"><b><u>Drop player here to add to list</u></b></p>
-
+        <!--Trying to add headers -->   
+        <div id="colHeaders" class="row">
+             <div class="col-xs-3">Name</div>
+             <div class="col-xs-2">Team</div>
+             <div class="col-xs-2">Draft Pick</div>
+             <div class="col-xs-2" style="width:75%">POG Count</div>
+             <div class="col-xs-1">Vote</div>
+            </div>
         <div id="RightPage" runat="server" class="container subVal" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white">
         </div>
         <br />
@@ -29,10 +36,6 @@
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
             var row = document.getElementById(data);
-            //var columnToSplit = row.lastChild;
-            //columnToSplit.removeAttribute("class");
-            //columnToSplit.setAttribute("class", "col-xs-1");
-            //columnToSplit.setAttribute("style", "color:blue;font-weight: bold;font-size:larger;background-color:green;");
 
             var table = $(<%= RightPage.ClientID%>);
             var div = document.createElement("div");
@@ -40,11 +43,16 @@
             div.setAttribute("ondrop", "return true");
             div.setAttribute("ondragover", "return true");
 
-            var test = table.contents().contents().length;
-            console.log("Count of elements inside of the container inside of RightPage: " + test);
-
             var val = table.contents().contents().last().prev().prev().html();
-            console.log("The value of val is: " + val);
+            if (val != 1)
+            {
+                var columnToSplit = row.lastChild;
+                columnToSplit.removeAttribute("class");
+                columnToSplit.setAttribute("class", "col-xs-1");
+                columnToSplit.setAttribute("style", "color:blue;font-weight: bold;font-size:larger;background-color:green;");
+                columnToSplit.previousSibling.removeAttribute("class");
+                columnToSplit.previousSibling.setAttribute("class", "col-xs-2");
+            }
 
             if (table.contents().contents().length == 0)
             {
@@ -55,6 +63,8 @@
             {
                 //Decrements previous point value by one and sets new number as new row point value
                 div.innerText = (parseInt(val) - 1)
+                
+                
             }
             
             if (val != "1") {

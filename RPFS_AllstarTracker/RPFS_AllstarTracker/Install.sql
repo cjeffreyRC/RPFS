@@ -136,7 +136,7 @@ GO
 --DROP PROCEDURE spGetMvpNominations
 CREATE PROCEDURE spGetMvpNominations
 AS BEGIN
-	select tbPlayers.playerId, playerName, tbTeams.teamLocation + ' ' +tbTeams.teamName as teamName, playerDraftPick
+	select tbPlayers.playerId, playerName, tbTeams.teamLocation + ' ' +tbTeams.teamName as teamName, playerDraftPick,playerOfGameCount
 	from tbMvpNominations left outer join
 		 tbPlayers ON tbPlayers.playerId = tbMvpNominations.playerId JOIN
 		 tbTeams on tbPlayers.playerTeamId = tbTeams.teamId
@@ -258,13 +258,20 @@ GO
 --	BEGIN
 --		SELECT '-1'
 --	END
-
+--exec spGetMvpNominations
 --SELECT playerName, COUNT(playerName) FROM tbPlayers GROUP BY playerName HAVING COUNT(playerName)>1
 
 --select * from tbPlayers where count(playerName) > 1
 --exec spGetPlayers
 --</TESTING>--
 
+
+
+
+
+--UPDATE tbPlayers set
+--		playerOfGameCount = 2
+--where playerId = 118
 
 -----------QUERY TO DO TRADES EASILY-----------------------------QUERY TO DO TRADES EASILY-------------------------------------------QUERY TO DO TRADES EASILY--------------------------------------QUERY TO DO TRADES EASILY--------------------------------
 --SELECT playerId,playerName,teamName, teamId FROM tbPlayers join 
