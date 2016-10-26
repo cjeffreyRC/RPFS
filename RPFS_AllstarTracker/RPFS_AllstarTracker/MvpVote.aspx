@@ -8,15 +8,16 @@
     <div style="width: 50%; float: left; position: fixed; right: 5%; top: 5%; white-space: nowrap; text-overflow: ellipsis;" runat="server">
         <img src="Pics/NBA2K16_Logo.png" style="width: 200px;" /><img src="Pics/RPFS2.jpeg" style="width: 200px;" />
         <p style="font-size: 3vw; width: 100%; height: 300px; border: dotted; border-color: darksalmon" ondragover="allowDrop(event)" ondrop="drop(event)"><b><u>Drop player here to add to list</u></b></p>
-        <!--Trying to add headers -->   
+        
+        <div id="RightPage" runat="server" class="container subVal" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white; background-color:black">
+            <!--Trying to add headers -->   
         <div id="colHeaders" class="row">
-             <div class="col-xs-3">Name</div>
-             <div class="col-xs-2">Team</div>
-             <div class="col-xs-2">Draft Pick</div>
-             <div class="col-xs-2" style="width:75%">POG Count</div>
-             <div class="col-xs-1">Vote</div>
-            </div>
-        <div id="RightPage" runat="server" class="container subVal" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white">
+             <div class="col-xs-3"><b><u>Name</u></b></div>
+             <div class="col-xs-3"><b><u>Team</u></b></div>
+             <div class="col-xs-2"><b><u>Draft Pick</u></b></div>
+             <div class="col-xs-1"><b><u>POG Count</u></b></div>
+             <div class="col-xs-1" style="margin-left:5px;"><b><u>Vote</u></b></div>
+        </div>
         </div>
         <br />
         <input id="btnSubmit" type="button" value="Vote!" style="float: right; height: 100px; width: 90%; font-size: 2.5vw;" onclick="submitValues()" />
@@ -39,22 +40,24 @@
 
             var table = $(<%= RightPage.ClientID%>);
             var div = document.createElement("div");
+            div.setAttribute("style", "padding-left:20px;");
             div.setAttribute("class", "col-xs-1");
             div.setAttribute("ondrop", "return true");
             div.setAttribute("ondragover", "return true");
 
             var val = table.contents().contents().last().prev().prev().html();
+            console.log("Value of val is: " + val + "; Html inside of Right page: " + table.contents().children().length);
             if (val != 1)
             {
                 var columnToSplit = row.lastChild;
                 columnToSplit.removeAttribute("class");
                 columnToSplit.setAttribute("class", "col-xs-1");
-                columnToSplit.setAttribute("style", "color:blue;font-weight: bold;font-size:larger;background-color:green;");
+                //columnToSplit.setAttribute("style", "color:blue;font-weight: bold;font-size:larger;background-color:green;");
                 columnToSplit.previousSibling.removeAttribute("class");
                 columnToSplit.previousSibling.setAttribute("class", "col-xs-2");
             }
 
-            if (table.contents().contents().length == 0)
+            if (table.contents().children().length == 5)
             {
                 //No rows exist yet
                 div.innerText = "3";
@@ -62,9 +65,7 @@
             else
             {
                 //Decrements previous point value by one and sets new number as new row point value
-                div.innerText = (parseInt(val) - 1)
-                
-                
+                div.innerText = (parseInt(val) - 1);
             }
             
             if (val != "1") {

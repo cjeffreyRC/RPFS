@@ -23,7 +23,7 @@ namespace DataAccessLayer
             //ROBS-PC\\SQLEXPRESS
             //localhost
 
-            ConnString = "Data Source=localhost;Initial Catalog=RPFS_2K16Allstar;Integrated Security=SSPI"; // Set the internal variable ConnString to the value of the user chosen value connString
+            ConnString = "Data Source=ROBS-PC\\SQLEXPRESS;Initial Catalog=RPFS_2K16Allstar;Integrated Security=SSPI"; // Set the internal variable ConnString to the value of the user chosen value connString
             _parameters = new List<SqlParameter>(); // initialize our list of parameters to 0
         }
 
