@@ -240,6 +240,7 @@ END
 GO
 --</STORED PROCEDURES>--
 -----------------<TESTING>--------------------
+--delete from tbMvpVotes
 --select * from tbMvpVotes
 --select * from tbPlayerVotes
 --select * from tbUsers

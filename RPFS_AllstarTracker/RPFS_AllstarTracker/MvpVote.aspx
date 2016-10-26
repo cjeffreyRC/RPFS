@@ -9,8 +9,7 @@
         <img src="Pics/NBA2K16_Logo.png" style="width: 200px;" /><img src="Pics/RPFS2.jpeg" style="width: 200px;" />
         <p style="font-size: 3vw; width: 100%; height: 300px; border: dotted; border-color: darksalmon" ondragover="allowDrop(event)" ondrop="drop(event)"><b><u>Drop player here to add to list</u></b></p>
         
-        <div id="RightPage" runat="server" class="container subVal" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white; background-color:black">
-            <!--Trying to add headers -->   
+        <div id="RightPage" runat="server" class="container subVal" style="float: left; width: 96%; border: solid; border-color: black; border-right-color: white; border-left-color: white; background-color:black"> 
         <div id="colHeaders" class="row">
              <div class="col-xs-3"><b><u>Name</u></b></div>
              <div class="col-xs-3"><b><u>Team</u></b></div>
@@ -57,7 +56,7 @@
                 columnToSplit.previousSibling.setAttribute("class", "col-xs-2");
             }
 
-            if (table.contents().children().length == 5)
+            if ($(".subVal").children().length == 1)
             {
                 //No rows exist yet
                 div.innerText = "3";
@@ -69,8 +68,6 @@
             }
             
             if (val != "1") {
-                
-
                 var colUp = document.createElement("div");
                 colUp.setAttribute("class", "col-xs-1");
                 colUp.setAttribute("ondrop", "return true");
@@ -102,7 +99,7 @@
                 row.appendChild(colDown);
                 
                 $(<%= RightPage.ClientID%>).append(row);
-                if ($(<%= RightPage.ClientID%>).contents().length == 4) {
+                if ($(".subVal").contents().length == 6) {
                     $('#btnSubmit').removeProp('disabled');
                 }
                 else {
@@ -111,7 +108,7 @@
             }
             else {
                 //Max number of rows reached
-                alert("Maximum of 3 players already selected. Refresh the page to start the vote over");
+                alert("Maximum of 3 players already selected. Submit your vote using the vote button, or refresh the page to start the vote over");
                 $('#btnSubmit').removeProp('disabled');
             }
         }
@@ -147,7 +144,7 @@
             for (var i = 3; i > 0 ; i--) {
 
                 playerArray[x] = [];
-                playerArray[x][0] = $(".subVal").contents()[x + 1].id.split("_").pop();
+                playerArray[x][0] = $(".subVal").contents()[x + 3].id.split("_").pop();
                 playerArray[x][1] = i;
                 x++;
             }
