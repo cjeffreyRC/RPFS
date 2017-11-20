@@ -1,0 +1,53 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="RPWeb.master.cs" Inherits="RPWeb.RPWeb" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>RP on the web</title>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <style>
+        * {
+            font-family: Verdana,Verdana, Geneva, sans-serif;
+        }
+
+        #introText {
+            font-size: 120%;
+        }
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <header>
+            <h1 style="text-align: center">RP on the web</h1>
+            <nav style="width: 95%; display: block; margin: auto">
+                <div id="navLeft" style="float: left">
+                    <asp:LinkButton ID="lnkHome" runat="server" PostBackUrl="~/Pages/home.aspx">Home</asp:LinkButton>
+                </div>
+                <div id="navRight" style="float: right">
+                    <asp:Panel ID="pnlNotLoggedIn" runat="server">
+                        <asp:LinkButton ID="lnkLogin" runat="server" PostBackUrl="~/Pages/Account/Login.aspx">Login</asp:LinkButton>
+                        Or
+                        <asp:LinkButton ID="lnkRegister" runat="server" PostBackUrl="~/Pages/Account/Register.aspx">Create an Account</asp:LinkButton>
+                    </asp:Panel>
+                    <asp:Panel ID="pnlIsLoggedIn" runat="server" Visible="false">
+                        <p>Hello <asp:Label ID="username" runat="server"></asp:Label>!</p>
+                        <asp:LinkButton ID="lnkAccount" runat="server" PostBackUrl="~/Pages/Account.aspx"></asp:LinkButton>
+                    </asp:Panel>
+                </div>
+            </nav>
+            <br />
+            <hr style="clear: both" />
+        </header>
+        <div id="pageContent" style="width: 95%; display: block; margin: auto">
+            <div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
