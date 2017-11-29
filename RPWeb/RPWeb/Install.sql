@@ -97,14 +97,16 @@ playerTeamId INT FOREIGN KEY REFERENCES tbTeams(teamId),
 playerPositionId INT FOREIGN KEY REFERENCES tbSportPositions(sportPositionId),
 playerOverall INT
 )
-BULK INSERT tbPlayers
-FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\RPWeb\RPWeb\Spreadsheets\test_basketball.csv'
-WITH
-(
-	FIRSTROW = 0,
-    FIELDTERMINATOR = ';',  --CSV field delimiter
-    ROWTERMINATOR = '\n'   --Use to shift the control to next row
-)
+
+
+--BULK INSERT tbPlayers
+--FROM 'C:\Users\Chris\Desktop\Repositories\RPFS\RPWeb\RPWeb\Spreadsheets\test_basketball.csv'
+--WITH
+--(
+--	FIRSTROW = 0,
+--    FIELDTERMINATOR = ';',  --CSV field delimiter
+--    ROWTERMINATOR = '\n'   --Use to shift the control to next row
+--)
 
 -------</TABLE DEFINITIONS>--------
 GO
@@ -255,6 +257,19 @@ END
 GO
 ---------------</GAMES>------------
 --------------<PLAYERS>------------
+CREATE PROCEDURE spAddPlayer
+(
+@playerName VARCHAR(50),
+@playerTeamId INT,
+@playerPositionId INT,
+@playerOverall INT
+)
+AS BEGIN
+	INSERT INTO tbPlayers (playerName, playerTeamId, playerPositionId, playerOverall) VALUES
+						 (@playerName,@playerTeamId,@playerPositionId, @playeroverall)
+END
+GO
+
 CREATE PROCEDURE spGetTeamPlayers
 (
 @teamId INT 
@@ -290,9 +305,9 @@ GO
 --select * from tbTeams
 --select * from tbGames
 --select * from tbSportPositions
---select pl.playerId, pl.playerName, po.positionName, t.teamName from tbPlayers pl inner join
---			tbSportPositions po on pl.playerPositionId = po.sportPositionId inner join
---			tbTeams t on pl.playerTeamId = t.teamId
+select pl.playerId, pl.playerName, po.positionName, t.teamName from tbPlayers pl inner join
+			tbSportPositions po on pl.playerPositionId = po.sportPositionId inner join
+			tbTeams t on pl.playerTeamId = t.teamId
 
 
 /*

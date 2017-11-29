@@ -69,6 +69,8 @@
     <Content Include="packages.config" />
     <Content Include="Pages\Admin\Teams.aspx" />
     <Content Include="RPWeb.Master" />
+    <Content Include="Spreadsheets\test_basketball.csv" />
+    <Content Include="Spreadsheets\test_basketball_withheader.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -159,9 +161,7 @@
       <Name>DataAccessLayer</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Spreadsheets\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,10 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using DataAccessLayer;
+using System.Text.RegularExpressions;
 
 namespace RPWeb.Pages.Admin
 {
@@ -92,7 +94,41 @@ namespace RPWeb.Pages.Admin
             d.AddParam("teamLocation", "N/A");
             d.ExecuteScalar("spAddTeam");
 
+            d.AddParam("leagueId", leagueId);
+            int freeAgencyId = Convert.ToInt32(d.ExecuteScalar("spGetLeagueFreeAgencyId"));
+
             //TODO: validate roster from file upload and save roster
+            //Regex r = new Regex("*/.csv");
+            if (Regex.IsMatch(fupRoster.FileName, "[^.]*[.]csv", RegexOptions.IgnoreCase))
+            {
+                //File is CSV, open and validate for roster
+                StreamReader sr = new StreamReader(fupRoster.FileContent);
+                string[] line1 = sr.ReadLine().Split(';');
+
+                if (line1[0] == "playerName" && line1[1] == "PositionId" && line1[2] == "Overall")
+                {
+                    //Headers validated, proceed with adding players to DB
+                    while (!sr.EndOfStream)
+                    {
+                        string[] player = sr.ReadLine().Split(';');
+                        d.AddParam("playerName", player[0]);
+                        d.AddParam("playerPositionId", player[1]);
+                        d.AddParam("playerOverall", player[2]);
+                        d.AddParam("playerTeamId", freeAgencyId);
+                        d.ExecuteNonQuery("spAddPlayer");
+                    }
+                }
+                else
+                {
+                    //Headers invalid, reject roster
+                }
+
+            }
+            else
+            {
+                //File is not CSV, return error
+            }
+            
         }
 
         protected void gvLeagues_RowCommand(object sender, GridViewCommandEventArgs e)
