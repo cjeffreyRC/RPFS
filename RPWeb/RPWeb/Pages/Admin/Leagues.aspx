@@ -15,8 +15,9 @@
     </asp:GridView>
     <input type="button" id="btnOpenModal" value="New League" />
 
-    <div id="backdrop" style="position: absolute; top: 0; height: 100%; width: 100%; background-color: rgba(0,0,0,0.80); display: none;">
+    <div id="backdrop" style="position: absolute; top: 0; height: 100%; width: 100%; background-color: rgba(0,0,0,0.80); display: none;" runat="server">
         <div id="updateContainer" style="background-color: white; border-radius: 8px; max-width: 30%; margin: auto; position: absolute; left: 0; right: 0; top: 25%; width: 40%;min-width:300px;">
+            <asp:Label ID="lblError" runat="server" ForeColor="Red"></asp:Label>
             <table style="margin:auto">
                 <tr>
                     <td>Sport:
@@ -83,11 +84,11 @@
     <script defer="defer">
         jQuery(window).load(function () {
             jQuery('#updateCancel').click(function () {
-                jQuery('#backdrop').hide();
+                jQuery('#<%= backdrop.ClientID%>').hide();
             })
 
             jQuery('#btnOpenModal').click(function () {
-                jQuery('#backdrop').show();
+                jQuery('#<%= backdrop.ClientID%>').show();
             })
 
             jQuery('#<%= ddlSport.ClientID%>').change(function () {

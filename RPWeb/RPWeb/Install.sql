@@ -238,7 +238,7 @@ GO
 ----------------<TYPES>------------
 CREATE PROCEDURE spGetAllLeagueTypes
 AS BEGIN
-	SELECT leagueTypeId as ID, leagueType as 'Type'
+	SELECT leagueTypeId as ID, leagueType as 'Name'
 	FROM tbLeagueTypes
 END
 GO

@@ -22,6 +22,24 @@ namespace RPWeb.Pages.Admin {
         protected global::System.Web.UI.WebControls.GridView gvLeagues;
         
         /// <summary>
+        /// backdrop control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl backdrop;
+        
+        /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
+        
+        /// <summary>
         /// ddlSport control.
         /// </summary>
         /// <remarks>
