@@ -87,6 +87,7 @@
     <Content Include="Pages\Admin\Leagues.aspx" />
     <Content Include="Pages\Admin\Users.aspx" />
     <Content Include="Pages\home.aspx" />
+    <Content Include="TODO.txt" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

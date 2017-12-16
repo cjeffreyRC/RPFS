@@ -1,0 +1,13 @@
+﻿Test CSV upload
+Create team management
+	-Allow admin to move players to different teams within the specified league
+	-Allow users to view teams within the specified league
+	-Allow users to add/drop players
+		-Enforce player count limit (max 15? per team)
+		-Added player will be removed from the free agency team, and added to the selected team
+		-Dropped player will be removed from the selected team, and added to the free agency team
+	-Allow users to offer trades to other users within the specified league
+		-Enforce player count limit
+		-Initiate a "pending" trade to the user who is receiving the offer
+		-Allow the user who is sending the offer to cancel the trade at any time prior to a response from the offer receiver
+	-Allow admin to add/remove teams and players
