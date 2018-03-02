@@ -1,13 +1,45 @@
 ﻿Test CSV upload
+	-Ensure that roster CSV files are validated appropriately - check for any exceptions
+	-Determine if any further columns are required for roster CSV (any requirements for other sports?)
 Create team management
 	-Allow admin to move players to different teams within the specified league
 	-Allow users to view teams within the specified league
 	-Allow users to add/drop players
-		-Enforce player count limit (max 15? per team)
+		-Enforce player count limit (sport dependent)
 		-Added player will be removed from the free agency team, and added to the selected team
 		-Dropped player will be removed from the selected team, and added to the free agency team
 	-Allow users to offer trades to other users within the specified league
 		-Enforce player count limit
 		-Initiate a "pending" trade to the user who is receiving the offer
 		-Allow the user who is sending the offer to cancel the trade at any time prior to a response from the offer receiver
-	-Allow admin to add/remove teams and players
+	-Allow admin to add/remove teams and players (full create/read/update/delete control)
+		-When removing teams from league:
+			Consider all games which this team is playing in - all games need to be deleted
+			Consider division/conference balance - any teams need to be moved?
+		-When adding teams to the league:
+			Consider game structure - new team must play games under the same structure as all initial teams
+			Consider division/conference balance - any teams need to be moved?
+		-When removing players from the league:
+			Should be able to delete player from db, and that's it - determine if this is 100% sufficient
+		-When adding players to the league:
+			Should player be added to free agency, or directly to a team?
+				- if added directly to a team, is the player count limit enforced?
+Create public views
+	Anyone who navigates to the website will be able to:
+		-View active and historic leagues
+		-View teams within active and historic leagues
+		-View players within active and historic leagues
+		-View transaction history within acitve and historic leagues(add, drop, trade)
+		-Contact us page? For inquiries about playing in a league, etc.
+		-Video library - Some form of sample of what we do, in preparation for a fully public website to come
+
+
+
+
+
+
+HIGH LEVEL PRIORITY LIST:
+1) Team Management
+2) ?
+3) User Interface (public views, as well as admin views. 
+	-There will be a basic UI in place prior to this, this is more of a "make it pretty"
